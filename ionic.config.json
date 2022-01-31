@@ -1,0 +1,7 @@
+{
+  "name": "paw_pal",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
