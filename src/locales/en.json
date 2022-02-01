@@ -1,0 +1,9 @@
+{
+    "login": {
+        "title": "Find your PawPal!",
+        "email": "Email",
+        "password": "Password",
+        "submit": "Lofin",
+        "register": "Create new account"
+      }
+}

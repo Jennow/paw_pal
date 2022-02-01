@@ -1,0 +1,9 @@
+{
+  "login": {
+    "title": "Finde deinen PawPal!",
+    "email": "Email",
+    "password": "Passwort",
+    "submit": "Anmelden",
+    "register": "Neues Profil anlegen"
+  }
+}
