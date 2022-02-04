@@ -5,5 +5,20 @@
     "password": "Passwort",
     "submit": "Anmelden",
     "register": "Neues Profil anlegen"
+  },
+  "profile": {
+    "title": "Dein Profil",
+    "form": {
+      "email": "Email Adresse",
+      "password": "Passwort",
+      "repeat_password": "Passwort wiederholen",
+      "upload_image": "Hochladen",
+      "remove_image": "Löschen",
+      "title": "Titel (z.B \"Lisa und Bello\")",
+      "description": "Beschreibe dich/euch in eigenen Worten",
+      "characteristic": "Eigenschaften",
+      "searching_for": "Suche nach",
+      "submit": "Speichern"
+    }
   }
 }

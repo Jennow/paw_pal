@@ -2,9 +2,9 @@
   <ion-page>
     <ion-content :fullscreen="true">
       <div id="container">
-        <h1>{{ $t("profile.form.title") }}</h1>
+        <h1>{{ $t("profile.title") }}</h1>
         <form @submit="login">
-          <input type="email" :placeholder="$t('proile.form.email')"/>
+          <input type="email" :placeholder="$t('profile.form.email')"/>
           <input type="password" :placeholder="$t('profile.form.password')"/>
           <input type="password" :placeholder="$t('profile.form.repeat_password')"/>
           <div id="profile-image-upload">
@@ -20,25 +20,16 @@
           </div>
           <input type="text" :placeholder="$t('profile.form.title')">
           <textarea :placeholder="$t('profile.form.description')" cols="30" rows="10"></textarea>
-          
-          <div class="custom-select" :tabindex="tabindex" @blur="open = false">
-            <div class="selected" :class="{ open: open }" @click="open = !open">
-              {{ selected }}
-            </div>
-            <div class="items" :class="{ selectHide: !open }">
-              <div
-                v-for="(option, i) of options"
-                :key="i"
-                @click="
-                  selected = option;
-                  open = false;
-                  $emit('input', option);
-                "
-              >
-                {{ option }}
-              </div>
-            </div>
-          </div>
+          <custom-select
+            :options="characteristics"
+            :default="$t('profile.form.characteristic')"
+          />
+
+          <custom-select
+            :options="searchingForPossibilities"
+            :default="$t('profile.form.searching_for')"
+          />
+
           <a type="submit" class="btn">{{ $t("profile.form.submit") }}</a>
         </form>
       </div>
@@ -48,10 +39,13 @@
 
 <script lang="ts">
 import {IonPage } from '@ionic/vue';
+import CustomSelect from '@/components/CustomSelect.vue';
+
 
 export default {
   components: {
     IonPage,
+    CustomSelect
   },
   props: {
     tabindex: {
@@ -62,10 +56,16 @@ export default {
   },
   data: function() {
     return {
-      options: [
-        'hallo',
-        'foo',
-        'bar'
+      // Todo: Diese Werte müssen auch übersetzbar sein
+      characteristics: [
+        'Verschmust',
+        'Verspielt',
+        'Intellient'
+      ],
+      searchingForPossibilities: [
+        'Gassi Kumpel',
+        'Gassi Service Anbieter',
+        'Gassi Service Kunden'
       ],
       default: null,
       selected: 'hallo',

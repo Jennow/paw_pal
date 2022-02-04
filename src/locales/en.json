@@ -1,9 +1,24 @@
 {
-    "login": {
-        "title": "Find your PawPal!",
-        "email": "Email",
+  "login": {
+      "title": "Find your PawPal!",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Lofin",
+      "register": "Create new account"
+    },
+    "profile": {
+      "title": "Your profile",
+      "form": {
+        "email": "Email Adress",
         "password": "Password",
-        "submit": "Lofin",
-        "register": "Create new account"
+        "repeat_password": "Repeat Password",
+        "upload_image": "Upload",
+        "remove_image": "Delete",
+        "title": "Title (i.e. \"Lisa and Bello\")",
+        "description": "Discribe yourself in you own words",
+        "characteristic": "Characteristics",
+        "searching_for": "Searching for",
+        "submit": "Save"
       }
+    }
 }
