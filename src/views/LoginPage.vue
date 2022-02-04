@@ -8,7 +8,7 @@
           <input type="email" :placeholder="$t('login.email')"/>
           <input type="password" :placeholder="$t('login.password')"/>
           <a @click="login" class="btn">{{ $t("login.submit") }}</a>
-          <a class="link" href="/profile">{{ $t("login.register") }}</a>
+          <a class="link" href="/profile/edit">{{ $t("login.register") }}</a>
         </form>
       </div>
     </ion-content>
