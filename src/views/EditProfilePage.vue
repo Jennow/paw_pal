@@ -67,9 +67,6 @@ export default {
         'Gassi Service Anbieter',
         'Gassi Service Kunden'
       ],
-      default: null,
-      selected: 'hallo',
-      open: false,
     };
   },
 }
