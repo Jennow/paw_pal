@@ -40,9 +40,9 @@
 <script lang="ts">
 import {IonPage } from '@ionic/vue';
 import CustomSelect from '@/components/CustomSelect.vue';
+import { defineComponent } from 'vue';
 
-
-export default {
+export default defineComponent({
   components: {
     IonPage,
     CustomSelect
@@ -56,20 +56,19 @@ export default {
   },
   data: function() {
     return {
-      // Todo: Diese Werte müssen auch übersetzbar sein
       characteristics: [
-        'Verschmust',
-        'Verspielt',
-        'Intellient'
+        this.$t('characteristics.cuddly'),
+        this.$t('characteristics.playful'),
+        this.$t('characteristics.intelligent'),
       ],
       searchingForPossibilities: [
-        'Gassi Kumpel',
-        'Gassi Service Anbieter',
-        'Gassi Service Kunden'
+        this.$t('searching_for.paw_pal'),
+        this.$t('searching_for.dog_walker'),
+        this.$t('searching_for.dog_owner'),
       ],
     };
   },
-}
+});
 </script>
 
 <style scoped>

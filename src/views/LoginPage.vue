@@ -1,4 +1,6 @@
 <template>
+  <LoadingScreen :isLoading="isLoading" />
+
   <ion-page>
     <ion-content :fullscreen="true">
       <div id="container">
@@ -17,12 +19,27 @@
 
 <script lang="ts">
 import {IonPage } from '@ionic/vue';
+import LoadingScreen from './LoadingScreen.vue';
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
   components: {
     IonPage,
+    LoadingScreen
+  },
+  data() {
+    return {
+      isLoading: true,
+    }
+  },
+  mounted() {
+    const page = this;
+    setTimeout(() => {
+      console.log('HALLO');
+      page.isLoading = false;
+    }, 500)
   }
-}
+})
 </script>
 
 <style scoped>

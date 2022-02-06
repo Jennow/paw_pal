@@ -8,7 +8,7 @@
   
             <ion-menu-toggle auto-hide="false" v-for="(p, i) in appPages" :key="i">
               <ion-item @click="selectedIndex = i" router-direction="root" :router-link="p.url" lines="none" detail="false" class="hydrated" :class="{ selected: selectedIndex === i }">
-                <ion-icon slot="start" :ios="p.iosIcon" :md="p.mdIcon"></ion-icon>
+                <ion-icon :ios="p.iosIcon" :md="p.mdIcon"></ion-icon>
                 <ion-label>{{ p.title }}</ion-label>
               </ion-item>
             </ion-menu-toggle>
@@ -46,25 +46,25 @@ export default defineComponent({
     const appPages = [
       {
         title: 'Explore',
-        url: '/folder/Inbox',
+        url: '/explore',
         iosIcon: mailOutline,
         mdIcon: mailSharp
       },
       {
         title: 'Matches',
-        url: '/folder/matches',
+        url: '/matches',
         iosIcon: paperPlaneOutline,
         mdIcon: paperPlaneSharp
       },
       {
         title: 'Profil',
-        url: '/folder/profile',
+        url: '/profile/edit',
         iosIcon: heartOutline,
         mdIcon: heartSharp
       },
       {
         title: 'Impressum',
-        url: '/folder/impressum',
+        url: '/impressum',
         iosIcon: heartOutline,
         mdIcon: heartSharp
       }

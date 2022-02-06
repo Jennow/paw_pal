@@ -20,5 +20,15 @@
         "searching_for": "Searching for",
         "submit": "Save"
       }
+    },
+    "characteristics": {
+      "cuddly": "cuddly",
+      "playful": "playful",
+      "intelligent": "intelligent"
+    },
+    "searching_for": {
+      "paw_pal": "paw pal",
+      "dog_walker": "dog walker",
+      "dog_owner": "dog owner"
     }
 }

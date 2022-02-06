@@ -20,5 +20,15 @@
       "searching_for": "Suche nach",
       "submit": "Speichern"
     }
+  },
+  "characteristics": {
+    "cuddly": "Verschmust",
+    "playful": "Verspielt",
+    "intelligent": "Intelligent"
+  },
+  "searching_for": {
+    "paw_pal": "Gassi Kumpel",
+    "dog_walker": "Gassi Service",
+    "dog_owner": "Hundebesitzer"
   }
 }
