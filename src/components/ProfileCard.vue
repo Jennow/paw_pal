@@ -87,6 +87,8 @@ template {}
         height: calc(100% - var(--small-distance));
         border-radius: 15px;
         box-sizing: content-box;
+        max-width: 500px;
+        margin: auto;
     }
 
     .card, .teaser {

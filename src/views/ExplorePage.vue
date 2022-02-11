@@ -123,7 +123,7 @@ export default {
     display: flex;
     position: fixed;
     bottom: 0;
-    padding: var(--small-distance);
+    padding: var(--medium-distance);
     justify-content: space-between;
 }
 

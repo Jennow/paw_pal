@@ -37,7 +37,7 @@ export default {
         height: 1.8rem;
         box-sizing: content-box;
         color: #fff;
-        padding: 24px;
+        padding: 20px;
         border-radius: 50%;
         text-align: center;
         font-size: 1.8rem;
