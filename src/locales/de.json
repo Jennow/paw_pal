@@ -1,4 +1,11 @@
 {
+  "routes": {
+    "explore": "Entdecken",
+    "edit_profile": "Profil bearbeiten",
+    "profile": "Profil",
+    "matches": "Matches",
+    "messages": "Chat"
+  },
   "login": {
     "title": "Finde deinen PawPal!",
     "email": "Email",
@@ -30,5 +37,9 @@
     "paw_pal": "Gassi Kumpel",
     "dog_walker": "Gassi Service",
     "dog_owner": "Hundebesitzer"
+  },
+  "chat": {
+    "submit": "Senden",
+    "message_placeholder": "Deine Nachricht"
   }
 }

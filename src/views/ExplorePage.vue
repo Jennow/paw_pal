@@ -1,16 +1,18 @@
 <template>
+    <ion-page>
     <nav-bar/>
-
-    <div id="container">
-        <div class="card-slider">
-            <profile-card :profile="activeProfile"/>
-        </div>
-
-        <div class="action-buttons">
-            <match-action-button @callback="showNextProfile" action="0"/>
-            <match-action-button @callback="showNextProfile" action="1"/>
-        </div>
-    </div>
+        <ion-content>
+            <div class="container">
+                <div class="card-slider">
+                    <profile-card :profile="activeProfile"/>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <match-action-button @callback="showNextProfile" action="0"/>
+                <match-action-button @callback="showNextProfile" action="1"/>
+            </div>
+        </ion-content>
+    </ion-page>
 </template>
 
 <script>
@@ -31,7 +33,7 @@ export default {
                     "id":4,
                     "title":"Jeni & Yoshi",
                     "status":1,
-                    "description":"Hallo! Wir suchen Menschen und Hunde zum gemeinsamen Gassi Gehen :)",
+                    "description":"Hallo! Wir suchen Menschen und Hunde zum gemeinsamen Gassi Gehen :). Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergrdolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergrdolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergrdolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergrdolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
                     "searchingFor":['paw_pal'],
                     "characteristics":['playful'],
                     "location": {
@@ -102,8 +104,8 @@ export default {
 }
 </script>
 
-<style>
-#container{
+<style scoped>
+.container{
     width: 100%;
     height: calc(100% - 56px);
     margin-top: 28px;
@@ -113,9 +115,12 @@ export default {
     height: 80%;
 }
 .action-buttons {
-    height: 20%;
+    /* height: 20%; */
     width: 100%;
     display: flex;
+    position: fixed;
+    bottom: 0;
+    padding: var(--small-distance);
     justify-content: space-between;
 }
 

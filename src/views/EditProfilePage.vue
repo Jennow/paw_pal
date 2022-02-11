@@ -1,51 +1,54 @@
 <template>
-  <ion-page>
-    <ion-content :fullscreen="true">
-      <div id="container">
-        <h1>{{ $t("profile.title") }}</h1>
-        <form @submit="login">
-          <input type="email" :placeholder="$t('profile.form.email')"/>
-          <input type="password" :placeholder="$t('profile.form.password')"/>
-          <input type="password" :placeholder="$t('profile.form.repeat_password')"/>
-          <div id="profile-image-upload">
-              <div class="img-container">
-                <img :src="require('../../public/images/customer_default.jpg')" alt="">
+<ion-page>
+  <nav-bar/>
+  <ion-content :fullscreen="true">
+    <div class="container">
+      <h1>{{ $t("profile.title") }}</h1>
+      <form @submit="login">
+        <input type="email" :placeholder="$t('profile.form.email')"/>
+        <input type="password" :placeholder="$t('profile.form.password')"/>
+        <input type="password" :placeholder="$t('profile.form.repeat_password')"/>
+        <div id="profile-image-upload">
+            <div class="img-container">
+              <img :src="require('../../public/images/customer_default.jpg')" alt="">
+            </div>
+            <div class="btn-container">
+              <div class="btn-group">
+                <a class="btn">{{ $t('profile.form.upload_image') }}</a>
+                <a class="btn">{{ $t('profile.form.remove_image') }}</a>
               </div>
-              <div class="btn-container">
-                <div class="btn-group">
-                  <a class="btn">{{ $t('profile.form.upload_image') }}</a>
-                  <a class="btn">{{ $t('profile.form.remove_image') }}</a>
-                </div>
-              </div>
-          </div>
-          <input type="text" :placeholder="$t('profile.form.title')">
-          <textarea :placeholder="$t('profile.form.description')" cols="30" rows="10"></textarea>
-          <custom-select
-            :options="characteristics"
-            :default="$t('profile.form.characteristic')"
-          />
+            </div>
+        </div>
+        <input type="text" :placeholder="$t('profile.form.title')">
+        <textarea :placeholder="$t('profile.form.description')" cols="30" rows="10"></textarea>
+        <custom-select
+          :options="characteristics"
+          :default="$t('profile.form.characteristic')"
+        />
 
-          <custom-select
-            :options="searchingForPossibilities"
-            :default="$t('profile.form.searching_for')"
-          />
+        <custom-select
+          :options="searchingForPossibilities"
+          :default="$t('profile.form.searching_for')"
+        />
 
-          <a type="submit" class="btn">{{ $t("profile.form.submit") }}</a>
-        </form>
-      </div>
-    </ion-content>
-  </ion-page>
+        <a type="submit" class="btn">{{ $t("profile.form.submit") }}</a>
+      </form>
+    </div>
+  </ion-content>
+</ion-page>
 </template>
 
 <script lang="ts">
 import {IonPage } from '@ionic/vue';
 import CustomSelect from '@/components/CustomSelect.vue';
+import NavBar from '@/components/NavBar.vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
   components: {
     IonPage,
-    CustomSelect
+    CustomSelect,
+    NavBar
   },
   props: {
     tabindex: {
@@ -75,11 +78,6 @@ export default defineComponent({
   ion-content {
     --background: var(--accent-background-color);
     --color: var(--accent-font-color);
-  }
-
-  #container {
-    top: 0;
-    transform: translateX(-50%);
   }
 
   .btn {

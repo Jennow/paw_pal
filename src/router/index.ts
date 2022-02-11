@@ -12,11 +12,28 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/profile/edit',
+    name: 'routes.edit_profile',
     component: () => import ('../views/EditProfilePage.vue')
   },
   {
+    path: '/profile/:id',
+    name: 'routes.profile',
+    component: () => import ('../views/ProfileDetailsPage.vue')
+  },
+  {
     path: '/explore',
-    component: () => import ('../views/ExplorePage.vue')
+    name: 'routes.explore',
+    component: () => import ('../views/ExplorePage.vue'),
+  },
+  {
+    path: '/matches',
+    name: 'routes.matches',
+    component: () => import ('../views/MatchesPage.vue'),
+  },
+  {
+    path: '/messages/:id',
+    name: 'routes.messages',
+    component: () => import ('../views/MessagesPage.vue'),
   }
 ]
 

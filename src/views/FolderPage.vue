@@ -41,7 +41,7 @@ export default {
 </script>
 
 <style scoped>
-#container {
+.container {
   text-align: center;
   position: absolute;
   left: 0;
@@ -50,19 +50,19 @@ export default {
   transform: translateY(-50%);
 }
 
-#container strong {
+.container strong {
   font-size: 20px;
   line-height: 26px;
 }
 
-#container p {
+.container p {
   font-size: 16px;
   line-height: 22px;
   color: #8c8c8c;
   margin: 0;
 }
 
-#container a {
+.container a {
   text-decoration: none;
 }
 </style>

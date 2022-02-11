@@ -1,7 +1,7 @@
 <template>
   <ion-app>
       <ion-menu content-id="main-content" type="overlay">
-        <ion-content>
+        <ion-content >
           <ion-list id="inbox-list">
             <ion-list-header>Menü</ion-list-header>
             <ion-note>Hi "username"</ion-note>
@@ -225,15 +225,15 @@ ion-item.selected {
 }
 
 /** Custom Styling */
-  #container {
+  .container {
     width: 100%;
     max-width: var(--max-container-width);
-    margin: auto;
-    padding: var(--medium-distance);
-    position: absolute;
+    margin: 0 auto var(--small-distance);
+    padding: 0 var(--medium-distance);
+    /* position: absolute;
     top: 50%;
     left: 50%;
-    transform: translateY(-50%) translateX(-50%);
+    transform: translateY(-50%) translateX(-50%); */
   }
 
   input, textarea, select {

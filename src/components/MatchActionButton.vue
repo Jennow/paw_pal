@@ -37,13 +37,13 @@ export default {
         height: 1.8rem;
         box-sizing: content-box;
         color: #fff;
-        padding: 30px;
+        padding: 24px;
         border-radius: 50%;
         text-align: center;
         font-size: 1.8rem;
     }
     .yes {
-        background-color: darkgreen;
+        background-color: var(--primary-color);
     }
 
     .no {
