@@ -34,6 +34,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/messages/:id',
     name: 'routes.messages',
     component: () => import ('../views/MessagesPage.vue'),
+  },
+  {
+    path: '/imprint',
+    name: 'routes.imprint',
+    component: () => import ('../views/ImprintPage.vue'),
   }
 ]
 

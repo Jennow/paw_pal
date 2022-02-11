@@ -10,8 +10,6 @@
                 <textarea type="text" :placeholder="$t('chat.message_placeholder')" />
                 <button class="btn btn-primary" type="submit">{{ $t('chat.submit') }}</button>
             </form>
-
-
         </ion-content>
     </ion-page>
 </template>
@@ -19,7 +17,7 @@
 <script>
 import NavBar from '@/components/NavBar.vue';
 import MessageBubble from '@/components/MessageBubble.vue';
-import { IonPage, IonContent} from '@ionic/vue';
+import { IonPage, IonContent } from '@ionic/vue';
 
 export default {
     components: {

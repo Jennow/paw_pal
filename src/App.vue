@@ -22,7 +22,7 @@
 import { IonApp, IonContent, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonMenu, IonMenuToggle, IonNote, IonRouterOutlet } from '@ionic/vue';
 import { defineComponent, ref } from 'vue';
 import { useRoute } from 'vue-router';
-import { archiveOutline, archiveSharp, bookmarkOutline, bookmarkSharp, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
+import { heartOutline, personOutline, chatboxEllipsesOutline, informationCircleOutline} from 'ionicons/icons';
 
 export default defineComponent({
   name: 'App',
@@ -46,26 +46,26 @@ export default defineComponent({
       {
         title: 'Explore',
         url: '/explore',
-        iosIcon: mailOutline,
-        mdIcon: mailSharp
+        iosIcon: heartOutline,
+        mdIcon: heartOutline
       },
       {
         title: 'Matches',
         url: '/matches',
-        iosIcon: paperPlaneOutline,
-        mdIcon: paperPlaneSharp
+        iosIcon: chatboxEllipsesOutline,
+        mdIcon: chatboxEllipsesOutline
       },
       {
         title: 'Profil',
         url: '/profile/edit',
-        iosIcon: heartOutline,
-        mdIcon: heartSharp
+        iosIcon: personOutline,
+        mdIcon: personOutline
       },
       {
         title: 'Impressum',
-        url: '/impressum',
-        iosIcon: heartOutline,
-        mdIcon: heartSharp
+        url: '/imprint',
+        iosIcon: informationCircleOutline,
+        mdIcon: informationCircleOutline
       }
     ];
     const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
@@ -81,20 +81,10 @@ export default defineComponent({
       selectedIndex,
       appPages, 
       labels,
-      archiveOutline, 
-      archiveSharp, 
-      bookmarkOutline, 
-      bookmarkSharp, 
       heartOutline, 
-      heartSharp, 
-      mailOutline, 
-      mailSharp, 
-      paperPlaneOutline, 
-      paperPlaneSharp, 
-      trashOutline, 
-      trashSharp, 
-      warningOutline, 
-      warningSharp,
+      personOutline, 
+      chatboxEllipsesOutline, 
+      informationCircleOutline,
       isSelected: (url: string) => url === route.path ? 'selected' : ''
     }
   }
@@ -104,6 +94,7 @@ export default defineComponent({
 <style>
 
 ion-menu ion-content {
+  font-family: var(--regular-font-family);
   --background: var(--ion-item-background, var(--ion-background-color, #fff));
 }
 
@@ -166,8 +157,10 @@ ion-menu.md ion-item ion-icon {
   color: #616e7e;
 }
 
-ion-menu.md ion-item ion-label {
+ion-menu.md ion-item ion-label, .item.sc-ion-label-ios-h, .item .sc-ion-label-ios-h {
   font-weight: 500;
+  font-family: var(--regular-font-family);
+  margin-left: var(--small-distance);
 }
 
 ion-menu.ios ion-content {
@@ -190,12 +183,13 @@ ion-menu.ios ion-item {
 }
 
 ion-menu.ios ion-item.selected ion-icon {
-  color: var(--ion-color-primary);
+  color: var(--primary-color);
 }
 
 ion-menu.ios ion-item ion-icon {
   font-size: 24px;
-  color: #73849a;
+  font-weight: bold;
+  color: #999;
 }
 
 ion-menu.ios ion-list#labels-list ion-list-header {

@@ -4,7 +4,8 @@
     "edit_profile": "Profil bearbeiten",
     "profile": "Profil",
     "matches": "Matches",
-    "messages": "Chat"
+    "messages": "Chat",
+    "imprint": "Impressum"
   },
   "login": {
     "title": "Finde deinen PawPal!",
@@ -41,5 +42,9 @@
   "chat": {
     "submit": "Senden",
     "message_placeholder": "Deine Nachricht"
+  },
+  "imprint": {
+    "title": "Impressum",
+    "text": "Lorem ipsum..."
   }
 }

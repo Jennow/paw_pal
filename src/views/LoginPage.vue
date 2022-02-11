@@ -3,7 +3,7 @@
 
   <ion-page>
     <ion-content :fullscreen="true">
-      <div id="container">
+      <div class="container">
         <img src="../../public/assets/icon/white_paw.svg" alt="">
         <h1>{{ $t("login.title") }}</h1>
         <form>
@@ -46,6 +46,13 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+  .container {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
   ion-content {
     --background: var(--accent-background-color);
     --color: var(--accent-font-color);
