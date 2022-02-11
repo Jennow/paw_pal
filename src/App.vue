@@ -5,7 +5,6 @@
           <ion-list id="inbox-list">
             <ion-list-header>Menü</ion-list-header>
             <ion-note>Hi "username"</ion-note>
-  
             <ion-menu-toggle auto-hide="false" v-for="(p, i) in appPages" :key="i">
               <ion-item @click="selectedIndex = i" router-direction="root" :router-link="p.url" lines="none" detail="false" class="hydrated" :class="{ selected: selectedIndex === i }">
                 <ion-icon :ios="p.iosIcon" :md="p.mdIcon"></ion-icon>

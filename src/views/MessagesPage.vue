@@ -19,11 +19,14 @@
 <script>
 import NavBar from '@/components/NavBar.vue';
 import MessageBubble from '@/components/MessageBubble.vue';
+import { IonPage, IonContent} from '@ionic/vue';
 
 export default {
     components: {
         NavBar,
-        MessageBubble
+        MessageBubble,
+        IonPage, 
+        IonContent
     },
     data() {
         return {

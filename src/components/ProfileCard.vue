@@ -15,10 +15,6 @@
     <div v-if="expanded" class="description">
         <p>{{ profile.description }}</p>
     </div>
-    <div class="action-buttons">
-        <match-action-button @callback="showNextProfile" action="0"/>
-        <match-action-button @callback="showNextProfile" action="1"/>
-    </div>
 </template>
 
 <script>

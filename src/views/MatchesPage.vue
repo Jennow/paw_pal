@@ -19,6 +19,7 @@
 
 <script>
 import NavBar from '@/components/NavBar.vue';
+import { IonLabel, IonAvatar, IonItem, IonList, IonContent, IonPage } from '@ionic/vue';
 
 export default {
     data() {
@@ -43,7 +44,13 @@ export default {
         }
     },
     components: {
-        NavBar
+        NavBar,
+        IonLabel,
+        IonAvatar,
+        IonItem,
+        IonList,
+        IonContent,
+        IonPage
     },
 }
 </script>

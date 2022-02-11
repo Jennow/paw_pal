@@ -8,8 +8,8 @@
                 </div>
             </div>
             <div class="action-buttons">
-                <match-action-button @callback="showNextProfile" action="0"/>
-                <match-action-button @callback="showNextProfile" action="1"/>
+                <match-action-button @callback="showNextProfile" :action="0"/>
+                <match-action-button @callback="showNextProfile" :action="1"/>
             </div>
         </ion-content>
     </ion-page>
@@ -19,12 +19,15 @@
 import NavBar from '@/components/NavBar.vue';
 import ProfileCard from '@/components/ProfileCard.vue';
 import MatchActionButton from '@/components/MatchActionButton.vue';
+import { IonPage, IonContent} from '@ionic/vue';
 
 export default {
     components: {
         ProfileCard,
         MatchActionButton,
-        NavBar
+        NavBar,
+        IonPage, 
+        IonContent
     },
     data() {
         return {

@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts">
-import {IonPage } from '@ionic/vue';
+import { IonPage, IonContent} from '@ionic/vue';
 import CustomSelect from '@/components/CustomSelect.vue';
 import NavBar from '@/components/NavBar.vue';
 import { defineComponent } from 'vue';
@@ -47,6 +47,7 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   components: {
     IonPage,
+    IonContent,
     CustomSelect,
     NavBar
   },

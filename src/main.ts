@@ -14,11 +14,15 @@ import '@ionic/vue/css/structure.css';
 /* Theme variables */
 import './theme/variables.css';
 
+import MatchActionButton from '@/components/MatchActionButton.vue';
+
 
 const app = createApp(App)
   .use(i18n)
   .use(IonicVue)
   .use(router);
+
+  app.component('match-action-button', MatchActionButton)
 
 router.isReady().then(() => {
   app.mount('#app');

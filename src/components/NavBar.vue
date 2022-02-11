@@ -31,7 +31,16 @@
 </style>
 
 <script>
+import { IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle } from '@ionic/vue';
+
 export default {
+  components: {
+    IonHeader, 
+    IonToolbar, 
+    IonButtons, 
+    IonMenuButton, 
+    IonTitle
+  },
   mounted() {
     console.log(this.$t(this.$route.name));
   }
