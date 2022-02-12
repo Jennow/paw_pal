@@ -46,5 +46,11 @@
   "imprint": {
     "title": "Impressum",
     "text": "Lorem ipsum..."
+  },
+  "error": {
+    "title": "Es ist ein Fehler aufgetreten",
+    "messages": {
+      "login_failed": "Login fehlgeschlagen"
+    }
   }
 }

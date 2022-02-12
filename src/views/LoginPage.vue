@@ -6,14 +6,13 @@
       <div class="container">
         <img src="../../public/assets/icon/white_paw.svg" alt="">
         <h1>{{ $t("login.title") }}</h1>
-        <form>
-          <input type="email" :placeholder="$t('login.email')"/>
-          <input type="password" :placeholder="$t('login.password')"/>
-          <a
-          @click="login" 
-          href="/explore"
-          class="btn">{{ $t("login.submit") }}</a>
-          <a class="link" href="/profile/edit">{{ $t("login.register") }}</a>
+        <form @submit.prevent="handleLogin">
+          <input type="email" v-model="form.email" required :placeholder="$t('login.email')"/>
+          <input type="password" v-model="form.password" required :placeholder="$t('login.password')"/>
+          <button
+          type="submit"
+          class="btn">{{ $t("login.submit") }}</button>
+          <router-link class="link" :to="'/profile/edit'">{{ $t("login.register") }}</router-link>
         </form>
       </div>
     </ion-content>
@@ -21,26 +20,69 @@
 </template>
 
 <script lang="ts">
-import {IonPage } from '@ionic/vue';
+import { IonPage, IonContent, alertController } from '@ionic/vue';
 import LoadingScreen from './LoadingScreen.vue';
 import { defineComponent } from 'vue';
+import { mapActions, mapGetters } from "vuex"
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
+  name: 'Login',
   components: {
     IonPage,
+    IonContent,
     LoadingScreen
+  },
+  setup() {
+    const router = useRouter();
+    return {
+      router
+    };
   },
   data() {
     return {
       isLoading: true,
+      form: {
+        email: '',
+        password: ''
+      }
     }
+  },
+  computed: {
+    ...mapGetters("auth", [
+      "authenticating",
+      "authenticationError",
+      "authenticationErrorCode"
+    ])
   },
   mounted() {
     const page = this;
     setTimeout(() => {
-      console.log('HALLO');
       page.isLoading = false;
+      console.log('HALLO')
+        this.router.push("/explore")
+
     }, 500)
+  },
+  methods: {
+     ...mapActions("auth", ["signIn"]),
+    async handleLogin() {
+      this.signIn(this.form).then(() => {
+        this.form.email = ""
+        this.form.password = ""
+        this.router.push("/explore")
+      }).catch(async (err: any) => {
+        console.log(err);
+        const errorAlert = await alertController
+            .create({
+              header: this.$t('error.title'),
+              subHeader: this.$t('error.messages.login_failed'),
+              message: err,
+              buttons: ['OK'],
+            });
+        await errorAlert.present()
+      })
+    }
   }
 })
 </script>
@@ -50,7 +92,8 @@ export default defineComponent({
   .container {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
   }
 
   ion-content {

@@ -87,6 +87,12 @@ export default defineComponent({
       informationCircleOutline,
       isSelected: (url: string) => url === route.path ? 'selected' : ''
     }
+  },
+  mounted() {
+    // this.axios.get("https://api.npms.io/v2/search?q=vue")
+    // .then(response => {
+    //   console.log(response)
+    // });
   }
 });
 </script>
@@ -223,10 +229,6 @@ ion-item.selected {
     max-width: var(--max-container-width);
     margin: 0 auto var(--small-distance);
     padding: 0 var(--medium-distance);
-    /* position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateY(-50%) translateX(-50%); */
   }
 
   input, textarea, select {
