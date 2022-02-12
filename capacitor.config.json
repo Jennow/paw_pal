@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "paw_pal",
-	"webDir": "dist",
-	"bundledWebRuntime": false
+  "appId": "com.jencoding.paw_pal",
+  "appName": "paw_pal",
+  "webDir": "dist",
+  "bundledWebRuntime": false
 }

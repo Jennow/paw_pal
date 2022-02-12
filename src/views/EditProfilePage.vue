@@ -5,28 +5,20 @@
     <div class="container">
       <h1>{{ $t("profile.title") }}</h1>
       <form @submit="login">
-        <input type="email" :placeholder="$t('profile.form.email')"/>
-        <input type="password" :placeholder="$t('profile.form.password')"/>
-        <input type="password" :placeholder="$t('profile.form.repeat_password')"/>
-        <div id="profile-image-upload">
-            <div class="img-container">
-              <img :src="require('../../public/images/customer_default.jpg')" alt="">
-            </div>
-            <div class="btn-container">
-              <div class="btn-group">
-                <a class="btn">{{ $t('profile.form.upload_image') }}</a>
-                <a class="btn">{{ $t('profile.form.remove_image') }}</a>
-              </div>
-            </div>
-        </div>
-        <input type="text" :placeholder="$t('profile.form.title')">
-        <textarea :placeholder="$t('profile.form.description')" cols="30" rows="10"></textarea>
+        <input required type="email" v-model="profile.email" :placeholder="$t('profile.form.email')"/>
+        <input :required="!isLoggedIn" type="password" :placeholder="$t('profile.form.password')"/>
+        <input :required="!isLoggedIn" type="password" :placeholder="$t('profile.form.repeat_password')"/>
+        <image-upload :src="profile.profileImageUrl" @update-photo="updatePhoto"/>
+        <input required type="text" v-model="profile.title" :placeholder="$t('profile.form.title')">
+        <textarea required v-model="profile.description" :placeholder="$t('profile.form.description')" cols="30" rows="10"></textarea>
         <custom-select
+          v-model="profile.characteristics"
           :options="characteristics"
           :default="$t('profile.form.characteristic')"
         />
 
         <custom-select
+          v-model="profile.searchingFor"
           :options="searchingForPossibilities"
           :default="$t('profile.form.searching_for')"
         />
@@ -41,6 +33,7 @@
 <script lang="ts">
 import { IonPage, IonContent} from '@ionic/vue';
 import CustomSelect from '@/components/CustomSelect.vue';
+import ImageUpload from '@/components/ImageUpload.vue';
 import NavBar from '@/components/NavBar.vue';
 import { defineComponent } from 'vue';
 
@@ -49,17 +42,25 @@ export default defineComponent({
     IonPage,
     IonContent,
     CustomSelect,
+    ImageUpload,
     NavBar
-  },
-  props: {
-    tabindex: {
-      type: Number,
-      required: false,
-      default: 0,
-    },
   },
   data: function() {
     return {
+      isLoggedIn: true, // Check Session
+      profile: { // Get Profile from Session. 
+          "id":5,
+          "title":"Jena & Yosha",
+          "status":1,
+          "description":"Hallo! Wir suchen Menschen und Hunde zum gemeinsamen Gassi Gehen :)",
+          "searchingFor":['paw_pal'],
+          "characteristics":['playful'],
+          "location": {
+              "lat": 50, 
+              "lng": 12
+          },
+          "profileImageUrl": "customer_default.jpg",
+      },
       characteristics: [
         this.$t('characteristics.cuddly'),
         this.$t('characteristics.playful'),
@@ -72,6 +73,11 @@ export default defineComponent({
       ],
     };
   },
+  methods: {
+    updatePhoto(path: string) {
+      this.profile.profileImageUrl = path;
+    }
+  }
 });
 </script>
 
@@ -84,39 +90,4 @@ export default defineComponent({
   .btn {
     margin-top: var(--big-distance);
   }
-
-  #profile-image-upload {
-    display: flex;
-    margin: var(--big-distance) auto;
-    justify-content: space-between;
-    max-width: 500px;
-  }
-
-  #profile-image-upload .btn-container {
-    flex: 1;
-    position: relative;
-    margin-left: var(--small-distance);
-  }
-
-  #profile-image-upload .btn-group {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    transform: translateY(-50%);
-  }
-
- #profile-image-upload .btn-group .btn {
-    margin: var(--small-distance) 0;
-  }
-
-  #profile-image-upload .img-container {
-      flex: 1;
-      text-align: center;
-  }
-  #profile-image-upload img {
-      border-radius: 50%;
-      max-height: 200px;
-  }
-
-
 </style>

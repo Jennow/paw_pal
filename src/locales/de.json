@@ -26,7 +26,8 @@
       "description": "Beschreibe dich/euch in eigenen Worten",
       "characteristic": "Eigenschaften",
       "searching_for": "Suche nach",
-      "submit": "Speichern"
+      "submit": "Speichern",
+      "take_picture": "Hochladen"
     }
   },
   "characteristics": {

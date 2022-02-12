@@ -20,6 +20,7 @@
 </template>
 
 <script>
+// TODO: Make multiple select possible
 export default {
     data() {
         return {
