@@ -2,9 +2,9 @@
     <ion-page>
     <nav-bar/>
         <ion-content>
-            <div class="container">
+            <div :class="{container: true, 'card-container': !expanded}">
                 <div class="card-slider">
-                    <profile-card :profile="activeProfile"/>
+                    <profile-card @show-details="showDetails" :expanded="expanded" :profile="activeProfile"/>
                 </div>
             </div>
             <div class="action-buttons">
@@ -31,6 +31,7 @@ export default {
     },
     data() {
         return {
+            expanded: false,
             profiles: [
                 {
                     "id":4,
@@ -90,6 +91,9 @@ export default {
         }
     },
     methods: {
+        showDetails() {
+            this.expanded = true;
+        },
         showNextProfile(action) {
             // TODO: Chunkweise Daten laden
             // TODO: Abhängig von Action Match in API anlegen
@@ -97,6 +101,7 @@ export default {
             this.activeProfileId ++;
             this.activeProfile = this.profiles.find(profile => profile.id == this.activeProfileId)
             this.activeProfile.profileImageUrl = require('../../public/images/' + this.activeProfile.profileImageUrl);
+            this.expanded = false;
 
         }
     },
@@ -108,15 +113,16 @@ export default {
 </script>
 
 <style scoped>
-.container{
+.container.card-container {
     width: 100%;
-    height: 60%;
+    height: 75%;
+    max-height: 600px;
     position: absolute;
     top: calc(50% - var(--big-distance));
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
-    
 }
+
 .card-slider {
     width: 100%;
     height: 100%;

@@ -19,12 +19,8 @@
 
 <script>
 export default {
-    data() {
-        return {
-            expanded: false
-        }
-    },
     props: {
+        expanded: Boolean,
         profile: Object,
         default: {
             profileImageUrl: '',
@@ -33,8 +29,7 @@ export default {
     },
     methods: {
         showDetails() {
-            this.expanded = true;
-            console.log('hallo')
+            this.$emit('show-details');
         }
     }
 }
