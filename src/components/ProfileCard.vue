@@ -41,9 +41,6 @@ export default {
 </script>
 
 <style scoped>
-
-template {}
-
     .teaser {
         position: absolute;
         top: -12px;
@@ -84,7 +81,7 @@ template {}
     .card {
         position: relative;
         display: block;
-        height: calc(100% - var(--small-distance));
+        height: 100%;
         border-radius: 15px;
         box-sizing: content-box;
         max-width: 500px;

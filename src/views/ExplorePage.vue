@@ -110,12 +110,16 @@ export default {
 <style scoped>
 .container{
     width: 100%;
-    height: calc(100% - 56px);
-    margin-top: 28px;
+    height: 60%;
+    position: absolute;
+    top: calc(50% - var(--big-distance));
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    
 }
 .card-slider {
     width: 100%;
-    height: 80%;
+    height: 100%;
 }
 .action-buttons {
     /* height: 20%; */
