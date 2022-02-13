@@ -53,15 +53,11 @@ export default defineComponent({
                     .putString(image.base64String, 'base64');
 
                 const url = await storageRef.child(filePath).getDownloadURL();
-
-                console.log(this);
-                console.log(url);
-                // console.log(loc.coords);
                 this.$emit('update-photo', url)
             }
         },
         deleteImage() {
-            
+            this.$emit('update-photo', '')
         }
     },
 });

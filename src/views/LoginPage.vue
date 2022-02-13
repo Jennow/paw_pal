@@ -59,9 +59,7 @@ export default defineComponent({
     const page = this;
     setTimeout(() => {
       page.isLoading = false;
-      console.log('HALLO')
-        this.router.push("/explore")
-
+      // this.router.push("/explore")
     }, 500)
   },
   methods: {
@@ -72,7 +70,6 @@ export default defineComponent({
         this.form.password = ""
         this.router.push("/explore")
       }).catch(async (err: any) => {
-        console.log(err);
         const errorAlert = await alertController
             .create({
               header: this.$t('error.title'),

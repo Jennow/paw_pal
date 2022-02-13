@@ -31,13 +31,13 @@ const AuthService = {
 
         try {
             const response = await ApiService.customRequest(requestData);
-            TokenService.saveToken(response.data.access_token);
-            TokenService.saveRefreshToken(response.data.refresh_token);
+            TokenService.saveToken(response.data.accessToken);
+            // TokenService.saveRefreshToken(response.data.refresh_token);
             ApiService.setHeader();
 
             ApiService.mount401Interceptor();
 
-            return response.data.access_token;
+            return response.data.accessToken;
         } catch (error) {
             this.catchError(error);
         }

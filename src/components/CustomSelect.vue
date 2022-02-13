@@ -1,29 +1,40 @@
 <template>
-    <div id="serching_for" class="custom-select" :tabindex="tabindex" @blur="open = false">
-        <div class="selected" :class="{ open: open }" @click="open = !open">
+    <div class="custom-select" :tabindex="tabindex">
+        <div class="selected" :class="{ open: open }"  @click="toggleSelect">
             {{ selected }}
         </div>
         <div class="items" :class="{ selectHide: !open }">
             <div
             v-for="(option, i) of options"
+            :class="values && values.includes(option) ? 'highlighted' : ''"
             :key="i"
-            @click="
-                selected = option;
-                open = false;
-                $emit('input', option);
-            "
+            @click="select(option)"
             >
-            {{ option }}
+            {{ $t( type + '.' + option) }}
             </div>
         </div>
     </div>
+        <div class="spacing" :style="{height: spacingHeight}"></div>
+
 </template>
 
 <script>
-// TODO: Make multiple select possible
+import { IonItem, IonLabel, IonSelect, IonSelectOption } from '@ionic/vue';
+
 export default {
+    components: {
+        IonItem, 
+        IonLabel, 
+        IonSelect, 
+        IonSelectOption
+    },
+    emits: [
+        'update'
+    ],
     data() {
         return {
+            open: false,
+            spacingHeight: 0,
             selected: this.default
             ? this.default
             : this.options.length > 0
@@ -32,18 +43,43 @@ export default {
         }
     },
     props: {
-    options: Array,
-    default: String,
-    open: {
-        type: Boolean,
-        default: false,
+        type: String,
+        options: Array,
+        values: Array,
+        default: String,
+        tabindex: {
+        type: Number,
+        required: false,
+        default: 0,
+        },
     },
-    tabindex: {
-      type: Number,
-      required: false,
-      default: 0,
-    },
-  },
+    methods: {
+        toggleSelect() {
+            if (this.open) {
+                this.closeSelect()
+            } else {
+                this.openSelect();
+            }
+        },
+        openSelect() {
+            this.open = true;
+            this.spacingHeight = (this.options.length * 51) + 'px';
+        },
+        closeSelect() {
+            this.open = false;
+            this.spacingHeight = 0;
+        },
+        select(option) {
+            let optionIsSelected = this.values && this.values.includes(option);
+            let newValues        = this.values ? this.values : [];
+            if (!optionIsSelected) {
+                newValues.push(option)
+            } else {
+                newValues = newValues.filter(v => v !== option); 
+            }
+            this.$emit('update', this.type, newValues)
+        }
+    }
 }
 </script>
 
@@ -110,9 +146,9 @@ export default {
         border-color: #ABA7AF transparent transparent transparent;
     }
 
-    .custom-select .items div:hover {
+    .custom-select .items .highlighted {
         background-color: var(--primary-color);
-        color: var(--primary-font-color);
+        color: var(--primary-font-color)!important;
     }
 
     .selectHide {
