@@ -125,36 +125,29 @@ export default defineComponent({
       if (this.isLoggedIn) {
         customerResponse = await ApiService.patch('/customers', this.profile)
         .catch(err => {
-            return Promise.reject(err.response.data);
+           return err.response.data;
         });
       } else {
         customerResponse = await ApiService.post('/customers', this.profile)
         .catch(err => {
-            return Promise.reject(err.response.data);
-        })
-        // Only log in if no error was thrown!!!
-        .then(this.signIn(this.customer))
-        .then(() => {
-          this.router.push("/explore")
-        });
-      
+            return err.response.data;
+        })      
       }
       let header           = this.$t('error.title');
       let subHeader        = this.$t('error.messages.updating_profile_failed');
       let message          = '';
 
-      console.log(customerResponse);
-      return;
-      if (customerResponse.data && customerResponse.data.success) {
+      if (customerResponse.error) {
+        message = customerResponse.error;
+      } else {
         header    = this.$t('success.title');
         subHeader = this.$t('success.messages.updating_profile_successful');
         message   = customerResponse.data.message;
-      } else if (customerResponse.error.keyPattern.email) {
-        message = this.$t('error.email_already_in_use');
-      } else if (customerResponse.error) {
-        message = customerResponse.error;
+        if (!this.isLoggedIn) {
+            this.router.push('/login')
+        }
       }
-    
+
       const alert = await alertController
         .create({
           header: header,
@@ -163,7 +156,6 @@ export default defineComponent({
           buttons: ['OK'],
         });
       await alert.present()
-      console.log(customerResponse);
     }
   },
   async mounted() {

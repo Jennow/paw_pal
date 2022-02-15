@@ -31,6 +31,9 @@
       "take_picture": "Hochladen"
     }
   },
+  "register": {
+    "title": "Registrieren"
+  },
   "characteristics": {
     "cuddly": "Verschmust",
     "playful": "Verspielt",
