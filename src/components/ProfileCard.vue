@@ -1,6 +1,6 @@
 <template>
-    <a :class="expanded ? 'teaser' : 'card'" @click="showDetails">
-        <img :src="profile.profileImageUrl" alt="">
+    <a v-if="profile" :class="expanded ? 'teaser' : 'card'" @click="showDetails">
+        <img :src="profile.profileImageUrl ? profile.profileImageUrl : ''" alt="">
         <div class="info">
             <h1>{{ profile.title }}</h1>
             <p>

@@ -20,6 +20,7 @@ import NavBar from '@/components/NavBar.vue';
 import ProfileCard from '@/components/ProfileCard.vue';
 import MatchActionButton from '@/components/MatchActionButton.vue';
 import { IonPage, IonContent} from '@ionic/vue';
+import ApiService from '@/services/api.service';
 
 export default {
     components: {
@@ -32,61 +33,8 @@ export default {
     data() {
         return {
             expanded: false,
-            profiles: [
-                {
-                    "id":4,
-                    "title":"Jeni & Yoshi",
-                    "status":1,
-                    "description":"Hallo! Wir suchen Menschen und Hunde zum gemeinsamen Gassi Gehen :). Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergrdolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergrdolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergrdolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergrdolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-                    "searchingFor":['paw_pal'],
-                    "characteristics":['playful'],
-                    "location": {
-                        "lat": 50, 
-                        "lng": 12
-                    },
-                    "profileImageUrl": "customer_4.jpg",
-                },
-                                {
-                    "id":5,
-                    "title":"Jena & Yosha",
-                    "status":1,
-                    "description":"Hallo! Wir suchen Menschen und Hunde zum gemeinsamen Gassi Gehen :)",
-                    "searchingFor":['paw_pal'],
-                    "characteristics":['playful'],
-                    "location": {
-                        "lat": 50, 
-                        "lng": 12
-                    },
-                    "profileImageUrl": "customer_default.jpg",
-                },
-                {
-                    "id":6,
-                    "title":"Hans",
-                    "status":1,
-                    "description":"Hallo! Wir suchen Menschen und Hunde zum gemeinsamen Gassi Gehen :)",
-                    "searchingFor":['paw_pal'],
-                    "characteristics":['playful'],
-                    "location": {
-                        "lat": 50, 
-                        "lng": 12
-                    },
-                    "profileImageUrl": "customer_4.jpg",
-                },
-                {
-                    "id":7,
-                    "title":"Franziskus Tierheim",
-                    "status":1,
-                    "description":"Hallo! Wir suchen Ehrenamtliche Gassi Geher für unsere Heim Hunde. Kommt gerne vorbei!",
-                    "searchingFor":['paw_pal'],
-                    "characteristics":['playful'],
-                    "location": {
-                        "lat": 50, 
-                        "lng": 12
-                    },
-                    "profileImageUrl": "customer_default.jpg",
-                }
-            ],
-            activeProfileId: 4,
+            profiles: [],
+            activeProfileIdentifier: 0,
             activeProfile: {}
         }
     },
@@ -97,17 +45,19 @@ export default {
         showNextProfile(action) {
             // TODO: Chunkweise Daten laden
             // TODO: Abhängig von Action Match in API anlegen
-            console.log(action);
-            this.activeProfileId ++;
-            this.activeProfile = this.profiles.find(profile => profile.id == this.activeProfileId)
-            this.activeProfile.profileImageUrl = require('../../public/images/' + this.activeProfile.profileImageUrl);
+            this.activeProfileIdentifier ++;
+            this.activeProfile = this.profiles[this.activeProfileIdentifier]
             this.expanded = false;
 
         }
     },
-    mounted() {
-      this.activeProfile = this.profiles.find(profile => profile.id == this.activeProfileId);
-      this.activeProfile.profileImageUrl = require('../../public/images/' + this.activeProfile.profileImageUrl);
+    async mounted() {
+        let profileData = await ApiService.get('/customers/explore')
+        .catch(err => {
+            return err.response.data;
+        });
+        this.profiles = profileData.data;
+        this.activeProfile = this.profiles[this.activeProfileIdentifier]
     }
 }
 </script>
