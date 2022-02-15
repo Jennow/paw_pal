@@ -4,13 +4,16 @@
         <ion-content >
           <ion-list id="inbox-list">
             <ion-list-header>Menü</ion-list-header>
-            <ion-note>Hi "username"</ion-note>
             <ion-menu-toggle auto-hide="false" v-for="(p, i) in appPages" :key="i">
               <ion-item @click="selectedIndex = i" router-direction="root" :router-link="p.url" lines="none" detail="false" class="hydrated" :class="{ selected: selectedIndex === i }">
                 <ion-icon :ios="p.iosIcon" :md="p.mdIcon"></ion-icon>
-                <ion-label>{{ p.title }}</ion-label>
+                <ion-label>{{ $t('routes.' + p.title) }}</ion-label>
               </ion-item>
             </ion-menu-toggle>
+            <ion-item class="logout hydrated" @click="logoutCustomer" router-direction="root" lines="none" detail="false">
+                <ion-icon :ios="logOut" :md="logOut"></ion-icon>
+                <ion-label>{{ $t('routes.logout') }}</ion-label>
+              </ion-item>
           </ion-list>
         </ion-content>
       </ion-menu>
@@ -22,7 +25,8 @@
 import { IonApp, IonContent, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonMenu, IonMenuToggle, IonNote, IonRouterOutlet } from '@ionic/vue';
 import { defineComponent, ref } from 'vue';
 import { useRoute } from 'vue-router';
-import { heartOutline, personOutline, chatboxEllipsesOutline, informationCircleOutline} from 'ionicons/icons';
+import { heartOutline, personOutline, chatboxEllipsesOutline, informationCircleOutline, logOut} from 'ionicons/icons';
+import { mapActions } from "vuex"
 
 export default defineComponent({
   name: 'App',
@@ -44,25 +48,25 @@ export default defineComponent({
     const selectedIndex = ref(0);
     const appPages = [
       {
-        title: 'Explore',
+        title: 'explore',
         url: '/explore',
         iosIcon: heartOutline,
         mdIcon: heartOutline
       },
       {
-        title: 'Matches',
+        title: 'matches',
         url: '/matches',
         iosIcon: chatboxEllipsesOutline,
         mdIcon: chatboxEllipsesOutline
       },
       {
-        title: 'Profil',
+        title: 'profile',
         url: '/profile/edit',
         iosIcon: personOutline,
         mdIcon: personOutline
       },
       {
-        title: 'Impressum',
+        title: 'imprint',
         url: '/imprint',
         iosIcon: informationCircleOutline,
         mdIcon: informationCircleOutline
@@ -85,6 +89,7 @@ export default defineComponent({
       personOutline, 
       chatboxEllipsesOutline, 
       informationCircleOutline,
+      logOut,
       isSelected: (url: string) => url === route.path ? 'selected' : ''
     }
   },
@@ -93,6 +98,15 @@ export default defineComponent({
     // .then(response => {
     //   console.log(response)
     // });
+  },
+  methods: {
+    ...mapActions("auth", ["signOut"]),
+    logoutCustomer() {
+      this.signOut().then(() => {
+        // this.router.push("/explore")
+        window.location.href = '/login';
+      })
+    }
   }
 });
 </script>
@@ -157,6 +171,10 @@ ion-menu.md ion-item.selected {
 
 ion-menu.md ion-item.selected ion-icon {
   color: var(--ion-color-primary);
+}
+
+ion-item.logout ion-icon {
+  color: brown!important;
 }
 
 ion-menu.md ion-item ion-icon {
@@ -288,6 +306,10 @@ ion-item.selected {
     margin-top:  var(--small-distance);
     display: block;
     text-align: center;
+  }
+
+  .logout {
+    color: brown;
   }
 
 </style>

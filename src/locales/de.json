@@ -5,7 +5,8 @@
     "profile": "Profil",
     "matches": "Matches",
     "messages": "Chat",
-    "imprint": "Impressum"
+    "imprint": "Impressum",
+    "logout": "Abmelden"
   },
   "login": {
     "title": "Finde deinen PawPal!",
@@ -35,7 +36,7 @@
     "playful": "Verspielt",
     "intelligent": "Intelligent"
   },
-  "searching_for": {
+  "searchingFor": {
     "paw_pal": "Gassi Kumpel",
     "dog_walker": "Gassi Service",
     "dog_owner": "Hundebesitzer"

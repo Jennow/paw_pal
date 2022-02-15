@@ -44,6 +44,8 @@ import NavBar from '@/components/NavBar.vue';
 import { defineComponent } from 'vue';
 import { TokenService }  from '@/services/token.service';
 import ApiService from '@/services/api.service';
+import { useRouter } from 'vue-router';
+import { mapActions, mapGetters } from "vuex"
 
 interface Profile {
     [key: string]: any
@@ -85,7 +87,14 @@ export default defineComponent({
       ],
     };
   },
+  setup() {
+    const router = useRouter();
+    return {
+      router
+    };
+  },
   methods: {
+    ...mapActions("auth", ["signIn"]),
     updatePhoto(path: string) {
       this.profile.profileImageUrl = path;
     },
@@ -116,23 +125,32 @@ export default defineComponent({
       if (this.isLoggedIn) {
         customerResponse = await ApiService.patch('/customers', this.profile)
         .catch(err => {
-            return err.response.data;
+            return Promise.reject(err.response.data);
         });
       } else {
         customerResponse = await ApiService.post('/customers', this.profile)
         .catch(err => {
-            return err.response.data;
+            return Promise.reject(err.response.data);
+        })
+        // Only log in if no error was thrown!!!
+        .then(this.signIn(this.customer))
+        .then(() => {
+          this.router.push("/explore")
         });
+      
       }
       let header           = this.$t('error.title');
       let subHeader        = this.$t('error.messages.updating_profile_failed');
       let message          = '';
+
+      console.log(customerResponse);
+      return;
       if (customerResponse.data && customerResponse.data.success) {
         header    = this.$t('success.title');
         subHeader = this.$t('success.messages.updating_profile_successful');
         message   = customerResponse.data.message;
       } else if (customerResponse.error.keyPattern.email) {
-          message = this.$t('error.email_already_in_use');
+        message = this.$t('error.email_already_in_use');
       } else if (customerResponse.error) {
         message = customerResponse.error;
       }
