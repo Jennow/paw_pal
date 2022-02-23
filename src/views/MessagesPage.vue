@@ -6,8 +6,8 @@
                 <message-bubble v-for="message in messages" :key="message" :message="message"/>
             </div>
 
-            <form class="container bottom" @submit="sendMessage">
-                <textarea type="text" :placeholder="$t('chat.message_placeholder')" />
+            <form class="container bottom" @submit.prevent="sendMessage">
+                <textarea v-model="messageInProgress" required type="text" :placeholder="$t('chat.message_placeholder')" />
                 <button class="btn btn-primary" type="submit">{{ $t('chat.submit') }}</button>
             </form>
         </ion-content>
@@ -18,6 +18,7 @@
 import NavBar from '@/components/NavBar.vue';
 import MessageBubble from '@/components/MessageBubble.vue';
 import { IonPage, IonContent } from '@ionic/vue';
+import ApiService from '@/services/api.service';
 
 export default {
     components: {
@@ -28,29 +29,33 @@ export default {
     },
     data() {
         return {
-            messages: [
-                {
-                    "_id": "61f8188b2d6725a8c028ae39",
-                    "status":1,
-                    "date":"2022-01-31T17:12:43.211Z",
-                    "text":"Hallo, Ich bins",
-                    "sentByCustomer": "61f6e9d34aead55f31c9070d"
-                },
-                                {
-                    "_id": "61f8188b2d6725a8c028ae39",
-                    "status":1,
-                    "date":"2022-01-31T17:12:43.211Z",
-                    "text":"MOIN, Was geht ab?",
-                    "sentByCustomer": "61f6e8384aead55f31c9070d"
-                },
-                                {
-                    "_id": "61f8188b2d6725a8c028ae39",
-                    "status":1,
-                    "date":"2022-01-31T17:12:43.211Z",
-                    "text":"Nicht viel, und bei dir?",
-                    "sentByCustomer": "61f6e9d34aead55f31c9070d"
-                }
-            ]
+            matchId: 0,
+            messages: [],
+            messageInProgress: ''
+        }
+    },
+    async mounted() {
+        this.matchId = this.$route.params.id;
+    },
+    methods: {
+        async updateChat() {
+            let messagesData = await ApiService.get('/matches/' + this.matchId + '/messages')
+            .catch(err => {
+                return err.response.data;
+            });
+            this.messages = messagesData.data.response;
+            this.messageInProgress = '';
+        },
+        async sendMessage() {
+            let post = {
+                message: this.messageInProgress,
+            };
+            let response = await ApiService.post('/matches/' + this.matchId + '/messages', post)
+            .catch(err => {
+                console.log(err.response.data);
+            });
+            this.updateChat();
+            console.log(response);
         }
     }
 }

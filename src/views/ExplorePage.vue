@@ -42,13 +42,21 @@ export default {
         showDetails() {
             this.expanded = true;
         },
-        showNextProfile(action) {
-            // TODO: Chunkweise Daten laden
-            // TODO: Abhängig von Action Match in API anlegen
+        async showNextProfile(action) {
+            // TODO: Chunkweise Daten laden    
+            let match = {
+                matchedCustomerObjectId: this.activeProfile._id,
+                action: action
+            }
+
+            let response = await ApiService.post('/matches', match)        
+            .catch(err => {
+                console.log(err.response.data)
+            });
+
             this.activeProfileIdentifier ++;
             this.activeProfile = this.profiles[this.activeProfileIdentifier]
             this.expanded = false;
-
         }
     },
     async mounted() {

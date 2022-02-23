@@ -1,7 +1,7 @@
 <template>
     <div class="col">
         <div :class="customerId === message.sentByCustomer ? 'message sent' : 'message received'">
-            {{ message.text }}
+            {{ message.message }}
         </div>
     </div>
  

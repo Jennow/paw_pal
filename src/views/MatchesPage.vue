@@ -8,7 +8,7 @@
                 <img :src="require('../../public/images/customer_default.jpg')" />
                 </ion-avatar>
                 <ion-label>
-                <h2>{{ match.partner }}</h2>
+                <h2>{{ match.customers[0].title }}</h2>
                 <p>{{ match.lastMessage }}</p>
                 </ion-label>
             </ion-item>
@@ -20,28 +20,21 @@
 <script>
 import NavBar from '@/components/NavBar.vue';
 import { IonLabel, IonAvatar, IonItem, IonList, IonContent, IonPage } from '@ionic/vue';
+import ApiService from '@/services/api.service';
 
 export default {
     data() {
         return {
-            matches: [
-                {
-                    _id: 1,
-                    partner: 'Lisa',
-                    lastMessage: 'Ja, ich fände das auch...'
-                },
-                {
-                    _id: 2,
-                    partner: 'Anjia und Bello',
-                    lastMessage: 'Ja, ich fände das auch...'
-                },
-                {
-                    _id: 3,
-                    partner: 'Safi und Yoshi',
-                    lastMessage: 'Ja, ich fände das auch...'
-                },
-            ]
+            matches: []
         }
+    },
+    async mounted() {
+       let matchesData = await ApiService.get('/matches')
+        .catch(err => {
+            return err.response.data;
+        });
+        this.matches = matchesData.data;
+        console.log(this.matches)
     },
     components: {
         NavBar,
