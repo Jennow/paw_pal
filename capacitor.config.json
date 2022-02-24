@@ -1,6 +1,6 @@
 {
   "appId": "com.jencoding.paw_pal",
-  "appName": "paw_pal",
+  "appName": "PawPal",
   "webDir": "dist",
   "bundledWebRuntime": false
 }
