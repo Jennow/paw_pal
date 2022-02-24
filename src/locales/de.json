@@ -52,10 +52,18 @@
     "title": "Impressum",
     "text": "Lorem ipsum..."
   },
+  "success": {
+    "title": "Aktion erfolgreich",
+    "messages": {
+      "updating_profile_successful": "Profil wurde gespeichert"
+    }
+  },
   "error": {
     "title": "Es ist ein Fehler aufgetreten",
     "messages": {
-      "login_failed": "Login fehlgeschlagen"
+      "login_failed": "Login fehlgeschlagen",
+      "no_data_found": "Es wurden keine weiteren Nutzer gefunden :(",
+      "updating_profile_failed": "Profil konnte nicht gespeichert werden."
     }
   }
 }

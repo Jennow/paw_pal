@@ -24,6 +24,7 @@ export default defineComponent({
         IonButton
     },
     props: {
+        customerId: String,
         src: {
             type: String
         },
@@ -35,19 +36,21 @@ export default defineComponent({
     },
     methods: {
         async takePicture(){
-            console.log(this);
             const image = await Camera.getPhoto({
                 quality: 90,
                 allowEditing: false,
                 resultType: CameraResultType.Base64
             });
             if (image?.base64String) {
-                // Get current user
-                // const user = auth.currentUser;
-                const customerId = '62080fa00ae8f9fea7e93bbb';
-                const filePath   = `images/${customerId}.${image.format}`;
-                const storageRef = storage.ref();
+            var filePath = '';
 
+                if (this.customerId) {
+                    filePath   = `images/${this.customerId}.${image.format}`;
+                } else {
+                    const tempKey = Math.random().toString(36).substr(2, 30);
+                    filePath   = `images/${tempKey}.${image.format}`;
+                }
+                const storageRef = storage.ref();
                 await storageRef
                     .child(filePath)
                     .putString(image.base64String, 'base64');

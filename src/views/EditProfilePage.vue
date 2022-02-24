@@ -10,7 +10,7 @@
         <input type="password" name="hidden" id="hidden" style="width: 0; height: 0; border: 0; padding: 0; margin: 0!important" />        <input required type="email" v-model="profile.email" :placeholder="$t('profile.form.email')"/>
         <input :required="!isLoggedIn" ref="password1" type="password" v-model="password1" @change="updatePassword" :placeholder="$t('profile.form.password')"/>
         <input :required="!isLoggedIn" ref="password2" type="password" v-model="password2" @change="updatePassword" :placeholder="$t('profile.form.repeat_password')"/>
-        <image-upload :src="profile.profileImageUrl" @update-photo="updatePhoto"/>
+        <image-upload :src="profile.profileImageUrl" @update-photo="updatePhoto" :customerId="customerId"/>
         <input required type="text" v-model="profile.title" :placeholder="$t('profile.form.title')">
         <textarea required v-model="profile.description" :placeholder="$t('profile.form.description')" cols="30" rows="10"></textarea>
         <custom-select
@@ -46,6 +46,7 @@ import { TokenService }  from '@/services/token.service';
 import ApiService from '@/services/api.service';
 import { useRouter } from 'vue-router';
 import { mapActions, mapGetters } from "vuex"
+import { storage } from '../main';
 
 interface Profile {
     [key: string]: any
@@ -70,7 +71,7 @@ export default defineComponent({
   },
   data: function() {
     return {
-      isLoggedIn: true, // Check Session,
+      isLoggedIn: false,
       customer: null,
       password1: '',
       password2: '',
@@ -143,8 +144,9 @@ export default defineComponent({
         header    = this.$t('success.title');
         subHeader = this.$t('success.messages.updating_profile_successful');
         message   = customerResponse.data.message;
+        console.log(this.isLoggedIn)
         if (!this.isLoggedIn) {
-            this.router.push('/login')
+            return this.router.push('/login')
         }
       }
 

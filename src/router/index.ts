@@ -64,21 +64,25 @@ router.beforeEach(async (to, from, next) => {
   const onlyWhenLoggedOut = to.matched.some(
     record => record.meta.onlyWhenLoggedOut
   );
-  const token    = TokenService.getToken();
+  const token  = TokenService.getToken();
   var loggedIn = !!token;
-
-  if (!isPublic && !loggedIn) {
-    return next({
-      path: '/login',
-      query: { redirect: to.fullPath }
-    });
-  }
 
   if (loggedIn) {
     await ApiService.get('/oauth/' + token + '/validate')
     .catch(err => {
         loggedIn = false;
         TokenService.removeToken();
+        return next({
+          path: '/login',
+          query: { redirect: to.fullPath }
+        });
+    });
+  }
+
+  if (!isPublic && !loggedIn) {
+    return next({
+      path: '/login',
+      query: { redirect: to.fullPath }
     });
   }
 
