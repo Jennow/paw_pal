@@ -1,6 +1,7 @@
 import { TokenService } from '@/services/token.service';
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
+import ApiService from '@/services/api.service';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -58,17 +59,26 @@ const router = createRouter({
 // Redirect to login page if not logged in.
 // Redirect to explore page if logged in and visiting content pages.
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const isPublic = to.matched.some(record => record.meta.public);
   const onlyWhenLoggedOut = to.matched.some(
     record => record.meta.onlyWhenLoggedOut
   );
-  const loggedIn = !!TokenService.getToken();
+  const token    = TokenService.getToken();
+  var loggedIn = !!token;
 
   if (!isPublic && !loggedIn) {
     return next({
       path: '/login',
       query: { redirect: to.fullPath }
+    });
+  }
+
+  if (loggedIn) {
+    await ApiService.get('/oauth/' + token + '/validate')
+    .catch(err => {
+        loggedIn = false;
+        TokenService.removeToken();
     });
   }
 

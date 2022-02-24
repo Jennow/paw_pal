@@ -62,7 +62,7 @@ export default {
     async mounted() {
         let profileData = await ApiService.get('/customers/explore')
         .catch(err => {
-            return err.response.data;
+            console.log(err);
         });
         this.profiles = profileData.data;
         this.activeProfile = this.profiles[this.activeProfileIdentifier]

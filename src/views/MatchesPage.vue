@@ -5,7 +5,7 @@
         <ion-list>
             <ion-item lines="full" v-for="match in matches" :key="match" :href="'/messages/' + match._id">
                 <ion-avatar slot="start">
-                <img :src="require('../../public/images/customer_default.jpg')" />
+                <img :src="match.customers[0].profileImageUrl ? match.customers[0].profileImageUrl : require('../../public/images/customer_default.jpg')" />
                 </ion-avatar>
                 <ion-label>
                 <h2>{{ match.customers[0].title }}</h2>

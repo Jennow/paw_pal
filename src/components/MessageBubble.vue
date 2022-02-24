@@ -11,13 +11,9 @@
 
 <script>
 export default {
-    data() {
-        return {
-            customerId: "61f6e9d34aead55f31c9070d", // TODO Aus localstorage auslesen
-        }
-    },
     props: {
         message: Object,
+        customerId: String,
         default: {
             text: '',
             date: '',

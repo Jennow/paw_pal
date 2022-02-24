@@ -3,7 +3,7 @@
         <nav-bar/>
         <ion-content>
             <div class="container">
-                <message-bubble v-for="message in messages" :key="message" :message="message"/>
+                <message-bubble v-for="message in messages" :key="message" :customerId="customerId" :message="message"/>
             </div>
 
             <form class="container bottom" @submit.prevent="sendMessage">
@@ -19,6 +19,7 @@ import NavBar from '@/components/NavBar.vue';
 import MessageBubble from '@/components/MessageBubble.vue';
 import { IonPage, IonContent } from '@ionic/vue';
 import ApiService from '@/services/api.service';
+import { TokenService } from '@/services/token.service';
 
 export default {
     components: {
@@ -35,7 +36,13 @@ export default {
         }
     },
     async mounted() {
-        this.matchId = this.$route.params.id;
+        this.matchId         = this.$route.params.id;
+        let accessToken      = TokenService.getToken();
+        let customerResponse = await ApiService.get('/customers/' + accessToken);
+        if (customerResponse.data.accessToken) {
+            this.customerId = customerResponse.data._id;
+        }
+        this.updateChat();
     },
     methods: {
         async updateChat() {
