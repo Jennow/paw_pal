@@ -110,7 +110,7 @@ export default defineComponent({
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%);
+    transform: translateY(-50%) translateX(-50%);
 }
 
 h2 {

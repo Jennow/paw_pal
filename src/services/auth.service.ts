@@ -1,5 +1,6 @@
 import ApiService from "./api.service";
 import { TokenService } from "./token.service";
+import NotificationService from "./notification.service";
 import { AxiosRequestConfig } from "axios";
 
 class AuthenticationError extends Error {
@@ -16,6 +17,8 @@ class AuthenticationError extends Error {
 
 const AuthService = {
     signIn: async function(signInData: any) {
+        const deviceToken = await NotificationService.pushInit();
+
         const requestData: AxiosRequestConfig = {
             method: "post",
             headers: {
@@ -25,7 +28,8 @@ const AuthService = {
             url: "/oauth/token",
             data: {
                 email: signInData.email,
-                password: signInData.password
+                password: signInData.password,
+                deviceToken: deviceToken,
             }
         };
 
@@ -72,11 +76,38 @@ const AuthService = {
             );
         }
     },
-    signOut() {
-        TokenService.removeToken();
-        TokenService.removeRefreshToken();
-        ApiService.removeHeader();
-        ApiService.unmount401Interceptor();
+    async signOut() {
+        let token       = TokenService.getToken();
+        let deviceToken = localStorage.getItem('deviceToken');
+
+        if (!token) {
+            return;
+        }
+
+        const requestData: AxiosRequestConfig = {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: 'Basic ' + btoa(process.env.VUE_APP_CLIENT_ID + ':' + process.env.VUE_APP_CLIENT_SECRET)
+            },
+            url: "/oauth/logout",
+            data: {
+                token: token,
+                deviceToken: deviceToken
+            }
+        };
+
+        try {
+            const response = await ApiService.customRequest(requestData);
+            TokenService.removeToken();
+            TokenService.removeRefreshToken();
+            ApiService.removeHeader();
+            ApiService.unmount401Interceptor();
+            return response;
+        } catch (error) {
+            this.catchError(error);
+        }
+
     },
     // signup: async function(email: any, password: any, name: any) {
     //     const signupData: AxiosRequestConfig = {

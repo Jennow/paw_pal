@@ -24,9 +24,11 @@
 <script lang="ts">
 import { IonApp, IonContent, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonMenu, IonMenuToggle, IonNote, IonRouterOutlet } from '@ionic/vue';
 import { defineComponent, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { heartOutline, personOutline, chatboxEllipsesOutline, informationCircleOutline, logOut} from 'ionicons/icons';
 import { mapActions } from "vuex"
+import NotificationService from '@/services/notification.service';
+
 
 export default defineComponent({
   name: 'App',
@@ -41,8 +43,7 @@ export default defineComponent({
     IonMenu, 
     IonMenuToggle, 
     IonNote, 
-    IonRouterOutlet
-    ,
+    IonRouterOutlet,
   },
   setup() {
     const selectedIndex = ref(0);
@@ -80,11 +81,13 @@ export default defineComponent({
     }
     
     const route = useRoute();
-    
+    const router = useRouter();
+
     return { 
       selectedIndex,
       appPages, 
       labels,
+      router,
       heartOutline, 
       personOutline, 
       chatboxEllipsesOutline, 
@@ -93,7 +96,13 @@ export default defineComponent({
       isSelected: (url: string) => url === route.path ? 'selected' : ''
     }
   },
+  data() {
+    return {
+      deviceToken: ''
+    }
+  },
   mounted() {
+    this.deviceToken = NotificationService.pushInit();
     // this.axios.get("https://api.npms.io/v2/search?q=vue")
     // .then(response => {
     //   console.log(response)
@@ -101,11 +110,10 @@ export default defineComponent({
   },
   methods: {
     ...mapActions("auth", ["signOut"]),
-    logoutCustomer() {
-      this.signOut().then(() => {
-        // this.router.push("/explore")
-        window.location.href = '/login';
-      })
+    async logoutCustomer() {
+      await this.signOut(this.deviceToken);
+      this.router.go('/login')
+
     }
   }
 });

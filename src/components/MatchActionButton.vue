@@ -24,9 +24,6 @@ export default {
         click() {
             this.$emit('callback', this.action);
         }
-    },
-    mounted() {
-        console.log(this.action)
     }
 }
 </script>

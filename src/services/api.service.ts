@@ -38,10 +38,10 @@ const ApiService = {
     mountRequestInterceptor() {
         this._requestInterceptor = axios.interceptors.request.use(async config => {
             console.log("show loading");
-            const loading = await loadingController.create({
-                message: 'Please wait...'
-            });
-            await loading.present();
+            // const loading = await loadingController.create({
+            //     message: 'Please wait...'
+            // });
+            // await loading.present();
 
             return config;
         });
@@ -49,11 +49,11 @@ const ApiService = {
     mount401Interceptor() {
         this._401interceptor = axios.interceptors.response.use(
             response => {
-                loadingController.dismiss().then(r => console.log(r));
+                // loadingController.dismiss().then(r => console.log(r));
                 return response;
             },
             async error => {
-                loadingController.dismiss().then(r => console.log(r));
+                // loadingController.dismiss().then(r => console.log(r));
                 if (error.request.status === 401) {
                     if (error.config.url.includes("oauth/token")) {
                         await store.dispatch("auth/signOut");

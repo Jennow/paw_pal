@@ -59,7 +59,6 @@ export default defineComponent({
     const page = this;
     setTimeout(() => {
       page.isLoading = false;
-      // this.router.push("/explore")
     }, 500)
   },
   methods: {

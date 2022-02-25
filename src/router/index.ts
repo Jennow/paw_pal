@@ -74,7 +74,6 @@ router.beforeEach(async (to, from, next) => {
         TokenService.removeToken();
         return next({
           path: '/login',
-          query: { redirect: to.fullPath }
         });
     });
   }
