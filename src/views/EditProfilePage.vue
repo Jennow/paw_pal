@@ -46,7 +46,6 @@ import { TokenService }  from '@/services/token.service';
 import ApiService from '@/services/api.service';
 import { useRouter } from 'vue-router';
 import { mapActions, mapGetters } from "vuex"
-import { storage } from '../main';
 
 interface Profile {
     [key: string]: any
@@ -144,20 +143,21 @@ export default defineComponent({
         header    = this.$t('success.title');
         subHeader = this.$t('success.messages.updating_profile_successful');
         message   = customerResponse.data.message;
-        console.log(this.isLoggedIn)
+        console.log(this.isLoggedIn);
         if (!this.isLoggedIn) {
-            return this.router.push('/login')
+            await this.router.push('/explore');
+            return;
         }
       }
 
-      const alert = await alertController
+      const customAlert = await alertController
         .create({
           header: header,
           subHeader: subHeader,
           message: message,
           buttons: ['OK'],
         });
-      await alert.present()
+      await customAlert.present()
     }
   },
   async mounted() {
