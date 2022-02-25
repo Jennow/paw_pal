@@ -28,6 +28,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { heartOutline, personOutline, chatboxEllipsesOutline, informationCircleOutline, logOut} from 'ionicons/icons';
 import { mapActions } from "vuex"
 import NotificationService from '@/services/notification.service';
+import {store} from '@/store';
 
 
 export default defineComponent({
@@ -111,7 +112,8 @@ export default defineComponent({
   methods: {
     ...mapActions("auth", ["signOut"]),
     async logoutCustomer() {
-      await this.signOut(this.deviceToken);
+      await store.dispatch("auth/signOut");
+      // await this.signOut(this.deviceToken);
       this.router.go('/login')
 
     }

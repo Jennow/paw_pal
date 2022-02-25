@@ -98,11 +98,11 @@ const AuthService = {
         };
 
         try {
-            const response = await ApiService.customRequest(requestData);
             TokenService.removeToken();
             TokenService.removeRefreshToken();
             ApiService.removeHeader();
             ApiService.unmount401Interceptor();
+            const response = await ApiService.customRequest(requestData);
             return response;
         } catch (error) {
             this.catchError(error);
