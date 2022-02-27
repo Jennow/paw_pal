@@ -153,6 +153,10 @@ export default {
         font-size: 0.9rem;
     }
 
+    .card .info span {
+        padding-right: 0.5em;
+    }
+
     .card {
         position: absolute;
         display: block;

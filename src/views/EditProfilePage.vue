@@ -10,7 +10,7 @@
         <input type="password" name="hidden" id="hidden" style="width: 0; height: 0; border: 0; padding: 0; margin: 0!important" />        <input required type="email" v-model="profile.email" :placeholder="$t('profile.form.email')"/>
         <input :required="!isLoggedIn" ref="password1" type="password" v-model="password1" @change="updatePassword" :placeholder="$t('profile.form.password')"/>
         <input :required="!isLoggedIn" ref="password2" type="password" v-model="password2" @change="updatePassword" :placeholder="$t('profile.form.repeat_password')"/>
-        <image-upload :src="profile.profileImageUrl" @update-photo="updatePhoto" :customerId="customerId"/>
+        <image-upload :src="profile.profileImageUrl" @update-photo="updatePhoto"/>
         <input required type="text" v-model="profile.title" :placeholder="$t('profile.form.title')">
         <textarea required v-model="profile.description" :placeholder="$t('profile.form.description')" cols="30" rows="10"></textarea>
         <custom-select
