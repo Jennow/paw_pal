@@ -68,17 +68,31 @@ export default defineComponent({
 
             this.activeProfileIdentifier ++;
             this.activeProfile = this.profiles[this.activeProfileIdentifier]
+            
+            if (!this.profiles[this.activeProfileIdentifier + 1]) {
+                this.loadProfiles(this.activeProfile.id)
+            }
+            
             this.expanded = false;
+        },
+        async loadProfiles(lastId) {
+            let url = '/customers/explore?limit=10';
+            if (lastId) {
+                url += '&last_id=' + lastId;
+            }
+
+            let profileData = await ApiService.get(url)
+            .catch(err => {
+                console.log(err);
+            });
+
+            this.profiles.push(...profileData.data);
+            this.activeProfile = this.profiles[this.activeProfileIdentifier];
+            this.isLoading     = false;
         }
     },
     async mounted() {
-        let profileData = await ApiService.get('/customers/explore')
-        .catch(err => {
-            console.log(err);
-        });
-        this.profiles = profileData.data;
-        this.activeProfile = this.profiles[this.activeProfileIdentifier];
-        this.isLoading = false;
+        this.loadProfiles(0);
     }
 })
 </script>
