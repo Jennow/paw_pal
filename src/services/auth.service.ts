@@ -29,6 +29,7 @@ const AuthService = {
             data: {
                 email: signInData.email,
                 password: signInData.password,
+                location: signInData.location,
                 deviceToken: deviceToken,
             }
         };

@@ -22,8 +22,9 @@
 
 <script lang="ts">
 import { IonPage, IonContent, alertController } from '@ionic/vue';
+import { Geolocation } from '@capacitor/geolocation';
 import LoadingScreen from './LoadingScreen.vue';
-import { defineComponent } from 'vue';
+import { defineComponent, getCurrentScope } from 'vue';
 import { mapActions, mapGetters } from "vuex"
 import { useRouter } from 'vue-router';
 
@@ -45,7 +46,8 @@ export default defineComponent({
       isLoading: true,
       form: {
         email: '',
-        password: ''
+        password: '',
+        location: {}
       }
     }
   },
@@ -56,14 +58,24 @@ export default defineComponent({
       "authenticationErrorCode"
     ])
   },
-  mounted() {
+  async mounted() {
     const page = this;
+    let location = await this.getCurrentPosition();
+    this.form.location = {
+      lat: location.coords.latitude,
+      lng: location.coords.longitude
+    }
     setTimeout(() => {
       page.isLoading = false;
     }, 500)
   },
+
   methods: {
      ...mapActions("auth", ["signIn"]),
+    async getCurrentPosition() {
+      const coordinates = await Geolocation.getCurrentPosition();
+      return coordinates;
+    },
     async handleLogin() {
       this.signIn(this.form).then(() => {
         this.form.email = ""
