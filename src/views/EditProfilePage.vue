@@ -143,7 +143,6 @@ export default defineComponent({
       } else {
         header    = this.$t('success.title');
         subHeader = this.$t('success.messages.updating_profile_successful');
-        message   = customerResponse.data.message;
         console.log(this.isLoggedIn);
       }
 
@@ -157,9 +156,7 @@ export default defineComponent({
             handler: () => {
               customAlert.dismiss(true);
 
-
               if (!customerResponse.error && !this.isLoggedIn) {
-          alert('REDIRECT!!!');
                 this.router.push('/login');
               }
             }
