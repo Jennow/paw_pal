@@ -1,13 +1,17 @@
 <template>
     <ion-page>
+  <LoadingScreen :isLoading="isLoading" />
+
     <nav-bar/>
         <ion-content>
             <template v-if="profiles.length > 0">
-                <div :class="{container: true, 'card-container': !expanded}">
-                    <div class="card-slider">
-                        <profile-card @show-details="showDetails" :expanded="expanded" :profile="activeProfile"/>
+                <div class="card-slider">
+                    <div :class="{container: expanded, 'card-container': !expanded}">
+                        <profile-card :expanded="false" :hidden="expanded" :profile="profiles[activeProfileIdentifier + 1]"/>
+                        <profile-card :reference="'activeCard'" :active="true" @show-details="showDetails"  @match="showNextProfile" :expanded="expanded" :profile="activeProfile"/>
                     </div>
                 </div>
+
                 <div class="action-buttons">
                     <match-action-button @callback="showNextProfile" :action="0"/>
                     <match-action-button @callback="showNextProfile" :action="1"/>
@@ -24,9 +28,10 @@
 import NavBar from '@/components/NavBar.vue';
 import ProfileCard from '@/components/ProfileCard.vue';
 import MatchActionButton from '@/components/MatchActionButton.vue';
-import { IonPage, IonContent} from '@ionic/vue';
+import { IonPage, IonContent } from '@ionic/vue';
 import ApiService from '@/services/api.service';
 import { defineComponent } from 'vue';
+import LoadingScreen from './LoadingScreen.vue';
 
 export default defineComponent({
     components: {
@@ -34,10 +39,12 @@ export default defineComponent({
         MatchActionButton,
         NavBar,
         IonPage, 
+        LoadingScreen,
         IonContent
     },
     data() {
         return {
+            isLoading: true,
             expanded: false,
             profiles: [],
             activeProfileIdentifier: 0,
@@ -49,7 +56,6 @@ export default defineComponent({
             this.expanded = true;
         },
         async showNextProfile(action) {
-            // TODO: Chunkweise Daten laden    
             let match = {
                 matchedCustomerObjectId: this.activeProfile._id,
                 action: action
@@ -70,30 +76,34 @@ export default defineComponent({
         .catch(err => {
             console.log(err);
         });
-        console.log(profileData)
         this.profiles = profileData.data;
-        this.activeProfile = this.profiles[this.activeProfileIdentifier]
+        this.activeProfile = this.profiles[this.activeProfileIdentifier];
+        this.isLoading = false;
     }
 })
 </script>
 
 <style scoped>
-.container.card-container {
-    width: 100%;
+.card-container {
+    width: calc(100% - var(--big-distance));
     height: 75%;
-    max-height: 600px;
-    position: absolute;
-    top: calc(50% - var(--big-distance));
-    left: 50%;
-    transform: translateY(-50%) translateX(-50%);
+    margin: var(--big-distance) auto;
+    position: relative;
 }
 
 .card-slider {
     width: 100%;
     height: 100%;
+    max-width: 500px;
+    max-height: 700px;
+    position: absolute;
+    box-sizing: border-box;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-55%) translateX(-50%);
 }
+
 .action-buttons {
-    /* height: 20%; */
     width: 100%;
     display: flex;
     position: fixed;
