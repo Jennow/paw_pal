@@ -1,7 +1,8 @@
 <template>
-  <LoadingScreen :isLoading="isLoading" />
 
   <ion-page>
+  <LoadingScreen :isLoading="isLoading" />
+
     <ion-content :fullscreen="true">
       <div class="container">
         <img src="../../public/assets/icon/white_paw.svg" alt="">

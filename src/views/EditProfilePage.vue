@@ -120,8 +120,9 @@ export default defineComponent({
       }
     },
     async saveCustomer() {
-      var customerResponse;
+      var customerResponse: any;
       this.profile.status = 1
+      console.log(this.loggedIn)
       if (this.isLoggedIn) {
         customerResponse = await ApiService.patch('/customers', this.profile)
         .catch(err => {
@@ -144,10 +145,6 @@ export default defineComponent({
         subHeader = this.$t('success.messages.updating_profile_successful');
         message   = customerResponse.data.message;
         console.log(this.isLoggedIn);
-        if (!this.isLoggedIn) {
-            await this.router.push('/explore');
-            return;
-        }
       }
 
       const customAlert = await alertController
@@ -155,7 +152,18 @@ export default defineComponent({
           header: header,
           subHeader: subHeader,
           message: message,
-          buttons: ['OK'],
+          buttons: [{
+            text: 'OK',
+            handler: () => {
+              customAlert.dismiss(true);
+
+
+              if (!customerResponse.error && !this.isLoggedIn) {
+          alert('REDIRECT!!!');
+                this.router.push('/login');
+              }
+            }
+          }],
         });
       await customAlert.present()
     }
