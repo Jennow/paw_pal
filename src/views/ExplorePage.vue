@@ -17,7 +17,7 @@
                     <match-action-button @callback="showNextProfile" :action="1"/>
                 </div>
             </template>
-            <div v-else class="center">
+            <div v-if="!activeProfile" class="center">
                 <h2>{{ $t('error.messages.no_data_found') }}</h2>
             </div>
         </ion-content>
