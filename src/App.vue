@@ -67,12 +67,12 @@ export default defineComponent({
         iosIcon: personOutline,
         mdIcon: personOutline
       },
-      {
-        title: 'imprint',
-        url: '/imprint',
-        iosIcon: informationCircleOutline,
-        mdIcon: informationCircleOutline
-      }
+      // {
+      //   title: 'imprint',
+      //   url: '/imprint',
+      //   iosIcon: informationCircleOutline,
+      //   mdIcon: informationCircleOutline
+      // }
     ];
     const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
     

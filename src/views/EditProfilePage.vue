@@ -122,7 +122,6 @@ export default defineComponent({
     async saveCustomer() {
       var customerResponse: any;
       this.profile.status = 1
-      console.log(this.loggedIn)
       if (this.isLoggedIn) {
         customerResponse = await ApiService.patch('/customers', this.profile)
         .catch(err => {

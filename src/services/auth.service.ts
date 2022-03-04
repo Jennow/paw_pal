@@ -37,9 +37,7 @@ const AuthService = {
         try {
             const response = await ApiService.customRequest(requestData);
             TokenService.saveToken(response.data.accessToken);
-            // TokenService.saveRefreshToken(response.data.refresh_token);
             ApiService.setHeader();
-
             ApiService.mount401Interceptor();
 
             return response.data.accessToken;
@@ -110,24 +108,6 @@ const AuthService = {
         }
 
     },
-    // signup: async function(email: any, password: any, name: any) {
-    //     const signupData: AxiosRequestConfig = {
-    //         method: "post",
-    //         headers: { "Content-Type": "application/json" },
-    //         url: "/oauth/signup",
-    //         data: {
-    //             email: email,
-    //             password: password,
-    //             name: name
-    //         }
-    //     };
-
-    //     try {
-    //         return await ApiService.customRequest(signupData);
-    //     } catch (error) {
-    //         this.catchError(error);
-    //     }
-    // },
     catchError: function(error: any) {
         let status;
         let description;

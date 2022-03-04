@@ -55,7 +55,8 @@
   "success": {
     "title": "Aktion erfolgreich",
     "messages": {
-      "updating_profile_successful": "Profil wurde gespeichert"
+      "updating_profile_successful": "Profil wurde gespeichert",
+      "match_confirmed": "Der Match wurde bestätigt! Ihr könnt jetzt miteinander Chatten."
     }
   },
   "error": {

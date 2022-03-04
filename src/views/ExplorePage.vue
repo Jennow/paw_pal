@@ -28,7 +28,7 @@
 import NavBar from '@/components/NavBar.vue';
 import ProfileCard from '@/components/ProfileCard.vue';
 import MatchActionButton from '@/components/MatchActionButton.vue';
-import { IonPage, IonContent } from '@ionic/vue';
+import { IonPage, IonContent, alertController } from '@ionic/vue';
 import ApiService from '@/services/api.service';
 import { defineComponent } from 'vue';
 import LoadingScreen from './LoadingScreen.vue';
@@ -66,12 +66,27 @@ export default defineComponent({
                 console.log(err.response.data)
             });
 
-            this.activeProfileIdentifier ++;
-            this.activeProfile = this.profiles[this.activeProfileIdentifier]
+            if (response.data.message === 'match_confirmed') {
+                const customAlert = await alertController
+                .create({
+                    header: this.$t('success.title'),
+                    message: this.$t('success.messages.match_confirmed'),
+                    buttons: [{
+                        text: 'OK',
+                        handler: () => {
+                            customAlert.dismiss(true);
+                        }
+                    }],
+                });
+                await customAlert.present()
+            }
             
             if (!this.profiles[this.activeProfileIdentifier + 1]) {
                 this.loadProfiles(this.activeProfile.id)
             }
+
+            this.activeProfileIdentifier ++;
+            this.activeProfile = this.profiles[this.activeProfileIdentifier]
             
             this.expanded = false;
         },
