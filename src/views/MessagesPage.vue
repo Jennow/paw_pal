@@ -30,6 +30,7 @@ export default {
     },
     data() {
         return {
+            customerId: null,
             matchId: 0,
             messages: [],
             messageInProgress: ''
@@ -48,9 +49,10 @@ export default {
         async updateChat() {
             let messagesData = await ApiService.get('/matches/' + this.matchId + '/messages')
             .catch(err => {
-                return err.response.data;
+                alert(err.response.data);
             });
-            this.messages = messagesData.data.response;
+
+            this.messages = messagesData.data;
             this.messageInProgress = '';
         },
         async sendMessage() {

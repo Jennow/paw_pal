@@ -102,13 +102,6 @@ export default defineComponent({
       deviceToken: ''
     }
   },
-  mounted() {
-    this.deviceToken = NotificationService.pushInit();
-    // this.axios.get("https://api.npms.io/v2/search?q=vue")
-    // .then(response => {
-    //   console.log(response)
-    // });
-  },
   methods: {
     ...mapActions("auth", ["signOut"]),
     async logoutCustomer() {

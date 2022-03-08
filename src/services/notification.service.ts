@@ -23,7 +23,6 @@ export default {
         let token = fcmToken ? fcmToken.token : 'browser';
 
         localStorage.setItem('deviceToken', token);
-        console.log('fcmToken: ' + JSON.stringify(fcmToken))
         return token;
       } catch (e) {
         console.log(e);
