@@ -26,7 +26,7 @@
           :type="'searchingFor'"
           :options="searchingForPossibilities"
           :values="profile.searchingFor"
-          :default="$t('profile.form.searching_for')"
+          :default="$t('profile.form.searchingFor')"
         />
 
         <button type="submit" class="btn">{{ $t("profile.form.submit") }}</button>
@@ -169,7 +169,7 @@ export default defineComponent({
     this.isLoggedIn      = !!accessToken;
     if (this.isLoggedIn) {
       let customerResponse = await ApiService.get('/customers/' + accessToken);
-      if (customerResponse.data.accessToken) {
+      if (customerResponse.data.id) {
         this.profile = customerResponse.data;
       }
     }

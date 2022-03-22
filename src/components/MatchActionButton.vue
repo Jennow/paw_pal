@@ -1,16 +1,16 @@
 <template>
-    <a @click="click" :class="action == 1 ? 'round-btn yes' : 'round-btn no'">
-        <font-awesome-icon :icon="action == 1 ? 'check' : 'times'" />
+    <a @click="click" :class="action == 1 ? 'round-btn yes' : action == 0 ? 'round-btn no' : 'round-btn help'">
+        <font-awesome-icon :icon="action == 1 ? 'check' : action == 0 ? 'times' : 'exclamation-triangle'" />
     </a>
 </template>
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core'
-
-import { faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faExclamation, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(faCheck)
+library.add(faExclamationTriangle)
 library.add(faTimes)
 
 export default {
@@ -45,6 +45,14 @@ export default {
 
     .no {
         background-color: brown;
+    }
+
+    .help {
+       background-color: #ffc00d;
+        width: 1.4rem;
+        height: 1.4rem;
+        font-size: 1.2rem;
+        padding: 10px;
     }
 
 

@@ -9,7 +9,7 @@
             </p>
             <p>
                 <ion-icon name="search-circle-outline"></ion-icon>
-                <span v-for="attribute in profile.searchingFor" :key="attribute">{{ $t('searching_for.' + attribute) }} </span>
+                <span v-for="attribute in profile.searchingFor" :key="attribute">{{ $t('searchingFor.' + attribute) }} </span>
             </p>
         </div>
     </a>
@@ -124,12 +124,19 @@ export default {
         display: none;
     }
 
+    .card.active {
+        z-index: 100;
+    }
+
     .card img, .teaser img{
         position: absolute;
         width: 100%;
         height: 100%;
         z-index: -1;
         object-fit: cover;
+        /* background-color: #fff; */
+        background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,255,231,0) 50%);
+
     }
 
     .card img {
@@ -166,7 +173,6 @@ export default {
     }
 
     .card, .teaser {
-        background: linear-gradient(0deg, rgba(0,0,0,0.615662650602409) 0%, rgba(0,255,231,0) 50%);
         box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     }
 

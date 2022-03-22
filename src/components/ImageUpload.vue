@@ -1,5 +1,5 @@
 <template>
-        <div id="profile-image-upload">
+    <div id="profile-image-upload">
         <div class="img-container">
             <img :src="src ? src : defaultSrc" alt="">
         </div>
@@ -13,7 +13,6 @@
 </template>
 
 <script>
-
 import { storage } from '../main';
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { IonButton }from '@ionic/vue';

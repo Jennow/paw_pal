@@ -14,6 +14,7 @@
 
                 <div class="action-buttons">
                     <match-action-button @callback="showNextProfile" :action="0"/>
+                    <match-action-button @callback="toggleReportMenu" :action="-1"/>
                     <match-action-button @callback="showNextProfile" :action="1"/>
                 </div>
             </template>
@@ -30,6 +31,7 @@ import ProfileCard from '@/components/ProfileCard.vue';
 import MatchActionButton from '@/components/MatchActionButton.vue';
 import { IonPage, IonContent, alertController } from '@ionic/vue';
 import ApiService from '@/services/api.service';
+import ReportService from '@/services/report.service';
 import { defineComponent } from 'vue';
 import LoadingScreen from './LoadingScreen.vue';
 
@@ -104,6 +106,12 @@ export default defineComponent({
             this.profiles.push(...profileData.data);
             this.activeProfile = this.profiles[this.activeProfileIdentifier];
             this.isLoading     = false;
+        },
+        async toggleReportMenu() {
+            ReportService.toggleReportMenu(
+                'Pawpal Kunde '+ this.activeProfile.title + ' ( id:' + this.activeProfile._id + ')',
+                'Unangebrachter Inhalt im Profil.'
+            )
         }
     },
     async mounted() {

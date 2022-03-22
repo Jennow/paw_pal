@@ -26,7 +26,7 @@
       "title": "Titel (z.B \"Lisa und Bello\")",
       "description": "Beschreibe dich/euch in eigenen Worten",
       "characteristic": "Eigenschaften",
-      "searching_for": "Suche nach",
+      "searchingFor": "Suche nach",
       "submit": "Speichern",
       "take_picture": "Hochladen"
     }
@@ -39,7 +39,7 @@
     "playful": "Verspielt",
     "intelligent": "Intelligent"
   },
-  "searching_for": {
+  "searchingFor": {
     "paw_pal": "Gassi Kumpel",
     "dog_walker": "Gassi Service",
     "dog_owner": "Hundebesitzer"
@@ -66,5 +66,12 @@
       "no_data_found": "Es wurden keine weiteren Nutzer gefunden :(",
       "updating_profile_failed": "Profil konnte nicht gespeichert werden."
     }
+  },
+  "report": {
+    "header": "Nutzer melden",
+    "message": "Möchtest du diesen Nutzer melden? Wir prüfen die Anfrage und werden ggf. diesen Nutzer einschränken.",
+    "cancel": "Abbrechen",
+    "confirm": "Melden"
+  
   }
 }

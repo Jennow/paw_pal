@@ -117,7 +117,7 @@ export default {
         left: 50%;
         right: 0;
         z-index: 1;
-        width: calc(100% - 60px);
+        width: calc(100% - 40px);
         border-radius: var(--input-border-radius)!important;
         transform: translateX(-50%);
     }

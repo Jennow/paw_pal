@@ -17,7 +17,7 @@
         "title": "Title (i.e. \"Lisa and Bello\")",
         "description": "Discribe yourself in you own words",
         "characteristic": "Characteristics",
-        "searching_for": "Searching for",
+        "searchingFor": "Searching for",
         "submit": "Save"
       }
     },
@@ -26,7 +26,7 @@
       "playful": "playful",
       "intelligent": "intelligent"
     },
-    "searching_for": {
+    "searchingFor": {
       "paw_pal": "paw pal",
       "dog_walker": "dog walker",
       "dog_owner": "dog owner"

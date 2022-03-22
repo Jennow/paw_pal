@@ -4,9 +4,6 @@
             {{ message.message }}
         </div>
     </div>
- 
-
-
 </template>
 
 <script>
@@ -22,7 +19,6 @@ export default {
             mode: 'sent'
         }
     },
-
 }
 </script>
 

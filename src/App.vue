@@ -27,9 +27,7 @@ import { defineComponent, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { heartOutline, personOutline, chatboxEllipsesOutline, informationCircleOutline, logOut} from 'ionicons/icons';
 import { mapActions } from "vuex"
-import NotificationService from '@/services/notification.service';
 import {store} from '@/store';
-
 
 export default defineComponent({
   name: 'App',
@@ -249,7 +247,7 @@ ion-item.selected {
     width: 100%;
     max-width: var(--max-container-width);
     margin: 0 auto var(--small-distance);
-    padding: 0 var(--medium-distance);
+    padding: 0 var(--small-distance);
   }
 
   input, textarea, select {
