@@ -1,6 +1,5 @@
 <template>
-
-  <ion-page>
+  <ion-page id="login-page">
   <LoadingScreen :isLoading="isLoading" />
 
     <ion-content :fullscreen="true">
@@ -43,6 +42,7 @@ export default defineComponent({
   },
   data() {
     return {
+      termsConfirmed: false,
       isLoading: true,
       form: {
         email: '',
@@ -65,13 +65,35 @@ export default defineComponent({
       lat: location.coords.latitude,
       lng: location.coords.longitude
     }
+    if (localStorage.getItem('confirmed-terms')) {
+      this.termsConfirmed = true;
+    }
+
+    if (!this.termsConfirmed) {
+        const termsAlert = await alertController
+            .create({
+              header: 'Nutzungsbedingungen bestätigen',
+              subHeader: 'Bitte lesen Sie unsere Nutzungsbedingungen und bestätigen Sie, dass sie einverstanden sind.',
+              message: 'Mit Klick auf "Ja" willigen Sie in unsere <a target="_blank" href="https://jencoding.com/privacy/paw_pal/#user_conduct">terms of use</a> ein.',
+              buttons: [{
+                text: 'Ja',
+                handler: () => {
+                  localStorage.setItem('confirmed-terms', '1');
+                    termsAlert.dismiss(true);
+                }
+              }],
+            });
+        await termsAlert.present()
+    }
     setTimeout(() => {
       page.isLoading = false;
     }, 500)
   },
-
   methods: {
      ...mapActions("auth", ["signIn"]),
+    confirmConditions() {
+
+    },
     async getCurrentPosition() {
       const coordinates = await Geolocation.getCurrentPosition();
       return coordinates;
