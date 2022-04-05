@@ -1,6 +1,6 @@
 <template>
     <ion-page>
-  <LoadingScreen :isLoading="isLoading" />
+    <LoadingScreen :isLoading="isLoading" />
 
     <nav-bar/>
         <ion-content>

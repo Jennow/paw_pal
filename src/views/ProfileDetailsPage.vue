@@ -1,4 +1,5 @@
 <template>
+    <ion-page>
     <nav-bar/>
     <div class="teaser">
         <img :src=" profile.profileImageUrl" alt="">
@@ -13,6 +14,7 @@
         <match-action-button @callback="showNextProfile" action="0"/>
         <match-action-button @callback="showNextProfile" action="1"/>
     </div>
+    </ion-page>
 </template>
 
 <script>

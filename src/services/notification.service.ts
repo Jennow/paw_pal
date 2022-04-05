@@ -1,9 +1,16 @@
 import { PushNotifications } from '@capacitor/push-notifications';
 import { FCM } from "capacitor-fcm";
+import { Capacitor } from '@capacitor/core';
+
 const fcm = new FCM();
 
 export default {
     async pushInit() {
+      const isPushNotificationsAvailable = Capacitor.isPluginAvailable('PushNotifications');
+     
+      if (!isPushNotificationsAvailable) {
+          return
+      }
       try {
         PushNotifications.addListener('registrationError', (error) => {
           console.log(`error on register ${JSON.stringify(error)}`);
