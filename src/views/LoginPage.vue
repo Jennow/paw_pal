@@ -74,7 +74,7 @@ export default defineComponent({
             .create({
               header: 'Nutzungsbedingungen bestätigen',
               subHeader: 'Bitte lesen Sie unsere Nutzungsbedingungen und bestätigen Sie, dass sie einverstanden sind.',
-              message: 'Mit Klick auf "Ja" willigen Sie in unsere <a target="_blank" href="https://jencoding.com/privacy/paw_pal/#user_conduct">terms of use</a> ein.',
+              message: 'Mit Klick auf "Ja" willigen Sie in unsere <a target="_blank" href="https://jeniferprochnow.com/privacy/paw_pal/#user_conduct">terms of use</a> ein.',
               buttons: [{
                 text: 'Ja',
                 handler: () => {
